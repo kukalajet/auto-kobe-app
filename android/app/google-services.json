@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "621576282107",
+    "firebase_url": "https://auto-kobe.firebaseio.com",
+    "project_id": "auto-kobe",
+    "storage_bucket": "auto-kobe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:621576282107:android:7da2f77e4831825275355e",
+        "android_client_info": {
+          "package_name": "com.example.auto_kobe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "621576282107-ulphg6si7iturc0ag5b6poib64biu47n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.auto_kobe",
+            "certificate_hash": "546e5c348442d8533fe3cb8439dd42ded3d95934"
+          }
+        },
+        {
+          "client_id": "621576282107-5a4hbb4v60eo3vpmeabkskdfp79e748r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0Xj3DFwZpXVg18y49uQe_5BmJKIiOwzM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "621576282107-5a4hbb4v60eo3vpmeabkskdfp79e748r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

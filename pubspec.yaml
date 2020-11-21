@@ -1,0 +1,48 @@
+name: auto_kobe
+description: A new Flutter project.
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.6.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  bloc: ^6.0.1
+  equatable: ^1.2.3
+  flutter_bloc: ^6.0.1
+  font_awesome_flutter: ^8.4.0
+  formz: ^0.2.0
+  google_fonts: ^1.1.0
+  meta: ^1.1.8
+  pedantic: ^1.9.0
+  modal_bottom_sheet: ^0.2.2
+  intl:
+  flutter_datetime_picker: ^1.4.0
+  authentication_repository:
+    path: packages/authentication_repository
+  listing_repository:
+    path: packages/listing_repository
+  brand_repository:
+    path: packages/brand_repository
+  model_repository:
+    path: packages/model_repository
+  country_repository:
+    path: packages/country_repository
+  door_type_repository:
+    path: packages/door_type_repository
+  fuel_type_repository:
+    path: packages/fuel_type_repository
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  # bloc_test: ^6.0.1
+  mockito: ^4.0.0
+  intl_translation:
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
