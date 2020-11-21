@@ -80,15 +80,17 @@ class ListingCreationScreen extends StatelessWidget {
                   child: _TypeInput(),
                 ), // NOTE: THIS CHOOSES WHAT KIND OF FORMS WE HAVE.
                 ListingWizardFirstForm(),
-                AnimatedOpacity(
-                  opacity: state.firstForm.valid ? 1.0 : 0.0,
-                  duration: Duration(seconds: 5),
-                  child: ListingWizardSecondForm(),
+                AnimatedSwitcher(
+                  duration: Duration(milliseconds: 500),
+                  child: state.firstForm.valid
+                      ? ListingWizardSecondForm()
+                      : SizedBox(),
                 ),
-                AnimatedOpacity(
-                  opacity: state.secondForm.valid ? 1.0 : 0.0,
-                  duration: Duration(seconds: 5),
-                  child: ListingWizardThirdForm(),
+                AnimatedSwitcher(
+                  duration: Duration(milliseconds: 500),
+                  child: state.secondForm.valid
+                      ? ListingWizardThirdForm()
+                      : SizedBox(),
                 ),
               ],
             );
