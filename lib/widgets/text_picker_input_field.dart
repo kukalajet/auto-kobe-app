@@ -25,11 +25,15 @@ class TextPickerInputField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Container(
-        height: size.height * 0.08,
+        height: size.height * 0.09,
         width: size.width * 0.9,
         decoration: BoxDecoration(
           color: Colors.blue[100].withOpacity(0.45),
           borderRadius: BorderRadius.circular(16.0),
+          border: Border.fromBorderSide(
+            // #5c6bc0
+            BorderSide(color: const Color(0xffaabbcc), width: 4.0),
+          ),
         ),
         child: Row(
           children: [
@@ -46,9 +50,9 @@ class TextPickerInputField extends StatelessWidget {
                       color: kWhite,
                     ),
                     hintText: textInputHint,
-                    hintStyle: kBodyText,
+                    hintStyle: kBodyTextBlack,
                   ),
-                  style: kBodyText,
+                  style: kBodyTextBlack,
                   keyboardType: inputType,
                 ),
               ),
@@ -87,9 +91,9 @@ class TextPickerInputField extends StatelessWidget {
                           ),
                         ),
                         hintText: pickerInputHint,
-                        hintStyle: kBodyText,
+                        hintStyle: kBodyTextBlack,
                       ),
-                      style: kBodyText,
+                      style: kBodyTextBlack,
                     ),
                   ),
                 ),

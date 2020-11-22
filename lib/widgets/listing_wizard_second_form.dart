@@ -39,7 +39,8 @@ class _OriginCountryInput extends StatelessWidget {
       builder: (context, state) {
         return PickerInputField(
           icon: Icons.access_time,
-          hint: state.country.value.name ?? 'COUNTRY',
+          hint: 'COUNTRY',
+          value: state.country.value.name,
           picker: Scaffold(
             body: ListingCountriesList(
               onTap: (country) {
@@ -64,7 +65,8 @@ class _DoorTypeInput extends StatelessWidget {
       builder: (context, state) {
         return PickerInputField(
           icon: Icons.add_link,
-          hint: state.doors.value.number ?? 'NUMBER OF DOORS',
+          hint: 'NUMBER OF DOORS',
+          value: state.doors.value.number,
           picker: Scaffold(
             body: ListingDoorTypeList(
               onTap: (doors) {
@@ -106,7 +108,9 @@ class _MileageInput extends StatelessWidget {
         return TextInputField(
           icon: Icons.animation,
           hint: 'MILEAGE',
+          showOverviewHint: state.mileage.value != 0,
           inputType: TextInputType.number,
+          suffixText: 'KM',
           onTextChanged: (String seats) => context
               .bloc<SecondFormBloc>()
               .add(ListingMileageChanged(int.parse(seats))),

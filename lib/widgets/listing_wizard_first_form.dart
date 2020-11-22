@@ -56,7 +56,8 @@ class _BrandInput extends StatelessWidget {
       builder: (context, state) {
         return PickerInputField(
           icon: Icons.car_repair,
-          hint: state.brand.value.name ?? "BRAND",
+          hint: 'BRAND',
+          value: state.brand.value.name,
           picker: Scaffold(
             body: ListingBrandsList(
               onTap: (brand) {
@@ -79,7 +80,8 @@ class _ModelInput extends StatelessWidget {
       builder: (context, state) {
         return PickerInputField(
           icon: Icons.car_rental,
-          hint: state.model.value.name ?? "MODEL",
+          hint: 'MODEL',
+          value: state.model.value.name,
           picker: Scaffold(
             body: ListingModelsList(
               brand: state.brand.value,
@@ -104,7 +106,9 @@ class _RegistrationInput extends StatelessWidget {
       builder: (context, state) {
         return DatePickerInputField(
           icon: Icons.car_rental,
-          hint: state.registration.value.toString() ?? "REGISTRATION DATE",
+          hint: state.registration.value.day != null
+              ? state.registration.value.toString()
+              : "REGISTRATION DATE",
           onConfirmed: (selected) {
             Date date = Date(
               day: selected.day,
@@ -112,9 +116,6 @@ class _RegistrationInput extends StatelessWidget {
               year: selected.year,
             );
             context.bloc<FirstFormBloc>().add(ListingRegistrationChanged(date));
-            // context
-            //     .bloc<FirstFormBloc>()
-            //     .add(ListingRegistrationChanged(date.day.toString()));
           },
         );
       },
@@ -141,6 +142,7 @@ class _RegistrationInput extends StatelessWidget {
 //     );
 //   }
 // }
+// TODO: Replace `TextInputField` with `TextPickerInputField`
 class _PriceInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -150,8 +152,8 @@ class _PriceInput extends StatelessWidget {
         return TextInputField(
           icon: Icons.directions_car,
           hint: "PRICE",
+          showOverviewHint: state.price.value != 0,
           inputType: TextInputType.number,
-          // suffixText: "KM",
           onTextChanged: (String price) => context
               .bloc<FirstFormBloc>()
               .add(ListingPriceChanged(int.parse(price))), // ?

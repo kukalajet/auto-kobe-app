@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:auto_kobe/blocs/forms/second_form/second_form_bloc.dart';
 import 'package:auto_kobe/models/forms/forms.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -26,6 +25,8 @@ class ListingWizardBloc extends Bloc<ListingWizardEvent, ListingWizardState> {
       yield _mapFirstFormChangedToState(event, state);
     } else if (event is SecondFormStateChanged) {
       yield _mapSecondFormChangedToState(event, state);
+    } else if (event is ThirdFormStateChanged) {
+      yield _mapThirdFormChangedToState(event, state);
     } else if (event is ListingFormSubmitted) {
       yield* _mapFormSubmimttedToState(event, state);
     }
@@ -42,6 +43,7 @@ class ListingWizardBloc extends Bloc<ListingWizardEvent, ListingWizardState> {
         type,
         state.firstForm,
         state.secondForm,
+        state.thirdForm,
       ]),
     );
   }
@@ -57,6 +59,7 @@ class ListingWizardBloc extends Bloc<ListingWizardEvent, ListingWizardState> {
         state.type,
         firstForm,
         state.secondForm,
+        state.thirdForm,
       ]),
     );
   }
@@ -72,6 +75,23 @@ class ListingWizardBloc extends Bloc<ListingWizardEvent, ListingWizardState> {
         state.type,
         state.firstForm,
         secondForm,
+        state.thirdForm,
+      ]),
+    );
+  }
+
+  ListingWizardState _mapThirdFormChangedToState(
+    ThirdFormStateChanged event,
+    ListingWizardState state,
+  ) {
+    final thirdForm = ThirdFormInput.dirty(event.state);
+    return state.copyWith(
+      thirdForm: thirdForm,
+      status: Formz.validate([
+        state.type,
+        state.firstForm,
+        state.secondForm,
+        thirdForm,
       ]),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:auto_kobe/utils/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_kobe/blocs/blocs.dart';
@@ -12,6 +13,7 @@ class ListingCreationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kWhite,
       body: MultiBlocProvider(
         providers: [
           BlocProvider<ListingWizardBloc>(
@@ -91,6 +93,11 @@ class ListingCreationScreen extends StatelessWidget {
                   child: state.secondForm.valid
                       ? ListingWizardThirdForm()
                       : SizedBox(),
+                ),
+                AnimatedSwitcher(
+                  duration: Duration(milliseconds: 500),
+                  child:
+                      state.secondForm.valid ? ImagePickerInput() : SizedBox(),
                 ),
               ],
             );

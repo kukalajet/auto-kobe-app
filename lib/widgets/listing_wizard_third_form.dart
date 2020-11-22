@@ -15,14 +15,17 @@ class ListingWizardThirdForm extends StatelessWidget {
       },
       child: Align(
         alignment: const Alignment(0, -1 / 3),
-        child: Column(mainAxisSize: MainAxisSize.min, children: [
-          const Padding(padding: EdgeInsets.all(8)),
-          _CubicCapacityInput(),
-          const Padding(padding: EdgeInsets.all(8)),
-          _FuelInput(),
-          const Padding(padding: EdgeInsets.all(8)),
-          _MotorPowerInput(),
-        ]),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Padding(padding: EdgeInsets.all(8)),
+            _CubicCapacityInput(),
+            const Padding(padding: EdgeInsets.all(8)),
+            _FuelInput(),
+            const Padding(padding: EdgeInsets.all(8)),
+            _MotorPowerInput(),
+          ],
+        ),
       ),
     );
   }
@@ -38,7 +41,9 @@ class _CubicCapacityInput extends StatelessWidget {
         return TextInputField(
           icon: Icons.animation,
           hint: 'CUBIC CAPACITY',
+          showOverviewHint: state.cubicCapacity.value != 0,
           inputType: TextInputType.number,
+          suffixText: 'CC',
           onTextChanged: (String cubicCapacity) => context
               .bloc<ThirdFormBloc>()
               .add(ListingCubicCapacityChanged(int.parse(cubicCapacity))),
@@ -56,7 +61,8 @@ class _FuelInput extends StatelessWidget {
       builder: (context, state) {
         return PickerInputField(
           icon: Icons.access_time,
-          hint: state.fuel.value.type ?? 'FUEL TYPE',
+          hint: 'FUEL TYPE',
+          value: state.fuel.value.type,
           picker: Scaffold(
             body: ListingFuelTypesList(
               onTap: (type) {
@@ -81,10 +87,12 @@ class _MotorPowerInput extends StatelessWidget {
         return TextInputField(
           icon: Icons.animation,
           hint: 'MOTOR POWER',
+          showOverviewHint: state.motorPower.value != 0,
           inputType: TextInputType.number,
-          onTextChanged: (String cubicCapacity) => context
+          suffixText: 'kW',
+          onTextChanged: (String motorPower) => context65
               .bloc<ThirdFormBloc>()
-              .add(ListingCubicCapacityChanged(int.parse(cubicCapacity))),
+              .add(ListingMotorPowerChanged(int.parse(motorPower))),
         );
       },
     );

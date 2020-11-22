@@ -15,7 +15,14 @@ class HomeScreen extends StatelessWidget {
 
   final List<Widget> _tabs = [
     FeedTab(),
-    Scaffold(body: Text("Create")),
+    // Scaffold(body: Text("Create")),
+    Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: ImagePickerInput(),
+        ),
+      ),
+    ),
   ];
 
   @override
