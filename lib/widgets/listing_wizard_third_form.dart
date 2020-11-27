@@ -90,7 +90,7 @@ class _MotorPowerInput extends StatelessWidget {
           showOverviewHint: state.motorPower.value != 0,
           inputType: TextInputType.number,
           suffixText: 'kW',
-          onTextChanged: (String motorPower) => context65
+          onTextChanged: (String motorPower) => context
               .bloc<ThirdFormBloc>()
               .add(ListingMotorPowerChanged(int.parse(motorPower))),
         );

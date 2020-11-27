@@ -44,9 +44,10 @@ class HomeScreen extends StatelessWidget {
           floatingActionButtonLocation:
               FloatingActionButtonLocation.miniCenterDocked,
           floatingActionButton: TomkaFloatingActionButton(onPressed: () {
-            showMaterialModalBottomSheet(
+            // showMaterialModalBottomSheet(
+            showCupertinoModalBottomSheet(
               expand: true,
-              bounce: true,
+              // bounce: true,
               context: context,
               backgroundColor: Colors.transparent,
               builder: (context, scrollController) => ListingCreationScreen(),

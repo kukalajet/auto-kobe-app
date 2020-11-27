@@ -7,12 +7,13 @@ class ListingDetail extends StatelessWidget {
   final Listing listing;
 
   final String path =
-      'https://files.porsche.com/filestore/image/multimedia/none/rd-2020-homepage-banner-pcna-panamera-kw43/normal/19742820-0d30-11eb-80ce-005056bbdc38/porsche-normal.jpg';
+      'https://moneyinc.com/wp-content/uploads/2016/06/Jaguar.jpg';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
+      body: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Image.network(path),
           Container(

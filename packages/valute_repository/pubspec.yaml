@@ -1,4 +1,4 @@
-name: model_repository
+name: valute_repository
 description: Dart package which manages the authentication domain.
 version: 1.0.0
 

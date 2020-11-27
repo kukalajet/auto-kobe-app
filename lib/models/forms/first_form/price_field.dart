@@ -1,14 +1,17 @@
 import 'package:formz/formz.dart';
+import 'package:valute_repository/valute_repository.dart';
 
 enum PriceFieldValidationError { invalid }
 
-class PriceField extends FormzInput<int, PriceFieldValidationError> {
-  const PriceField.pure() : super.pure(0);
-  const PriceField.dirty(int value) : super.dirty(value);
+class PriceField extends FormzInput<Price, PriceFieldValidationError> {
+  const PriceField.pure() : super.pure(const Price(value: null, valute: null));
+  const PriceField.dirty(Price value) : super.dirty(value);
 
   @override
-  PriceFieldValidationError validator(int value) {
-    if (value <= 0) return PriceFieldValidationError.invalid;
+  PriceFieldValidationError validator(Price value) {
+    if (value.value == null && value.valute == null)
+      return PriceFieldValidationError.invalid;
+
     return null;
   }
 }

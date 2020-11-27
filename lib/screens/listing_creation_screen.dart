@@ -75,31 +75,39 @@ class ListingCreationScreen extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            return ListView(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: _TypeInput(),
-                ), // NOTE: THIS CHOOSES WHAT KIND OF FORMS WE HAVE.
-                ListingWizardFirstForm(),
-                AnimatedSwitcher(
-                  duration: Duration(milliseconds: 500),
-                  child: state.firstForm.valid
-                      ? ListingWizardSecondForm()
-                      : SizedBox(),
+            return SizedBox.expand(
+              child: SingleChildScrollView(
+                primary: true,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: _TypeInput(),
+                    ), // NOTE: THIS CHOOSES WHAT KIND OF FORMS WE HAVE.
+                    ListingWizardFirstForm(),
+                    AnimatedSwitcher(
+                      duration: Duration(milliseconds: 500),
+                      child: state.firstForm.valid
+                          ? ListingWizardSecondForm()
+                          : SizedBox(),
+                    ),
+                    AnimatedSwitcher(
+                      duration: Duration(milliseconds: 500),
+                      child: state.secondForm.valid
+                          ? ListingWizardThirdForm()
+                          : SizedBox(),
+                    ),
+                    AnimatedSwitcher(
+                      duration: Duration(milliseconds: 500),
+                      child: state.secondForm.valid
+                          ? ImagePickerInput()
+                          : SizedBox(),
+                    ),
+                  ],
                 ),
-                AnimatedSwitcher(
-                  duration: Duration(milliseconds: 500),
-                  child: state.secondForm.valid
-                      ? ListingWizardThirdForm()
-                      : SizedBox(),
-                ),
-                AnimatedSwitcher(
-                  duration: Duration(milliseconds: 500),
-                  child:
-                      state.secondForm.valid ? ImagePickerInput() : SizedBox(),
-                ),
-              ],
+              ),
             );
           },
           buildWhen: (previousState, currentState) =>

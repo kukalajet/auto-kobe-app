@@ -2,6 +2,7 @@ import 'package:brand_repository/brand_repository.dart';
 import 'package:auto_kobe/blocs/brand/brand_bloc.dart';
 import 'package:auto_kobe/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ListingBrandsList extends StatefulWidget {
@@ -31,7 +32,7 @@ class _ListingBrandsListState extends State<ListingBrandsList> {
     return BlocConsumer<BrandBloc, BrandState>(
       listener: (context, state) {
         if (!state.hasReachedMax && _isBottom) {
-          _brandBloc..add(BrandFetched()); // ..add(BrandFavoriteFetched());
+          _brandBloc..add(BrandFetched());
         }
       },
       builder: (context, state) {
@@ -43,47 +44,44 @@ class _ListingBrandsListState extends State<ListingBrandsList> {
         }
         if (brandStatus == BrandStatus.success ||
             favoritestatus == BrandFavoriteStatus.success) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Expanded(
-                flex: 1,
-                child: GridView.builder(
+          return NestedScrollView(
+            controller: ScrollController(),
+            physics: ScrollPhysics(parent: PageScrollPhysics()),
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
+              return <Widget>[
+                SliverGrid(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
-                    // crossAxisSpacing: 5.0,
-                    // mainAxisSpacing: 5.0,
                   ),
-                  itemCount: state.favorites.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return index >= state.favorites.length
-                        ? BottomLoader()
-                        : _BrandItem(
-                            brand: state.favorites[index],
-                            onTap: widget.onTap,
-                          );
-                  },
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                      return index >= state.favorites.length
+                          ? BottomLoader()
+                          : _BrandItem(
+                              brand: state.favorites[index],
+                              onTap: widget.onTap,
+                            );
+                    },
+                    childCount: state.favorites.length,
+                  ),
                 ),
-              ),
-              Expanded(
-                flex: 3,
-                child: ListView.builder(
-                  itemBuilder: (BuildContext context, int index) {
-                    return index >= state.brands.length
-                        ? BottomLoader()
-                        : _BrandItem(
-                            brand: state.brands[index],
-                            onTap: widget.onTap,
-                          );
-                  },
-                  itemCount: state.hasReachedMax
-                      ? state.brands.length
-                      : state.brands.length + 1,
-                  controller: _scrollController,
-                ),
-              ),
-            ],
+              ];
+            },
+            body: ListView.builder(
+              itemBuilder: (BuildContext context, int index) {
+                return index >= state.brands.length
+                    ? BottomLoader()
+                    : _BrandItem(
+                        brand: state.brands[index],
+                        onTap: widget.onTap,
+                      );
+              },
+              itemCount: state.hasReachedMax
+                  ? state.brands.length
+                  : state.brands.length + 1,
+              controller: _scrollController,
+            ),
           );
         }
 
@@ -132,5 +130,53 @@ class _BrandItem extends StatelessWidget {
       dense: true,
       onTap: () => onTap(brand),
     );
+  }
+}
+
+/// TESTING
+class ModalScrollController extends InheritedWidget {
+  /// Creates a widget that associates a [ScrollController] with a subtree.
+  ModalScrollController({
+    Key key,
+    @required this.controller,
+    @required Widget child,
+  })  : assert(controller != null),
+        super(
+          key: key,
+          child: PrimaryScrollController(
+            controller: controller,
+            child: child,
+          ),
+        );
+
+  /// The [ScrollController] associated with the subtree.
+  ///
+  /// See also:
+  ///
+  ///  * [ScrollView.controller], which discusses the purpose of specifying a
+  ///    scroll controller.
+  final ScrollController controller;
+
+  /// Returns the [ScrollController] most closely associated with the given
+  /// context.
+  ///
+  /// Returns null if there is no [ScrollController] associated with the given
+  /// context.
+  static ScrollController of(BuildContext context) {
+    final result =
+        context.dependOnInheritedWidgetOfExactType<ModalScrollController>();
+    return result?.controller;
+  }
+
+  @override
+  bool updateShouldNotify(ModalScrollController oldWidget) =>
+      controller != oldWidget.controller;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>(
+        'controller', controller,
+        ifNull: 'no controller', showName: false));
   }
 }

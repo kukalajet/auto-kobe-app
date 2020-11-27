@@ -52,7 +52,6 @@ class _ListingModelsListState extends State<ListingModelsList> {
                     ? BottomLoader()
                     : _ModelItem(
                         model: state.models[index],
-                        // onTap: widget.onTap(state.models[index]),
                         onTap: widget.onTap,
                       );
               },
@@ -78,7 +77,6 @@ class _ListingModelsListState extends State<ListingModelsList> {
 
   void _onScroll() {
     if (_isBottom) {
-      // _modelBloc.add(ModelFetched(context.bloc<ModelBloc>().state.brand));
       _modelBloc.add(ModelFetched(widget.brand));
     }
   }

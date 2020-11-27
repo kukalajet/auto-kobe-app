@@ -18,7 +18,6 @@ class ListingWizardFirstForm extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // _TypeInput(),
             const Padding(padding: EdgeInsets.all(8)),
             _BrandInput(),
             const Padding(padding: EdgeInsets.all(8)),
@@ -33,20 +32,6 @@ class ListingWizardFirstForm extends StatelessWidget {
     );
   }
 }
-
-// class _TypeInput extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocBuilder<FirstFormBloc, FirstFormState>(
-//       buildWhen: (previous, current) => previous.type != current.type,
-//       builder: (context, state) {
-//         return TypePicker(
-//             onTypeSelected: (type) =>
-//                 context.bloc<FirstFormBloc>().add(ListingTypeChanged(type)));
-//       },
-//     );
-//   }
-// }
 
 class _BrandInput extends StatelessWidget {
   @override
@@ -106,9 +91,9 @@ class _RegistrationInput extends StatelessWidget {
       builder: (context, state) {
         return DatePickerInputField(
           icon: Icons.car_rental,
-          hint: state.registration.value.day != null
-              ? state.registration.value.toString()
-              : "REGISTRATION DATE",
+          hint: 'REGISTRATION DATE',
+          value: state.registration.value.toString(),
+          showOverviewHint: state.registration.value.day != null,
           onConfirmed: (selected) {
             Date date = Date(
               day: selected.day,
@@ -123,40 +108,30 @@ class _RegistrationInput extends StatelessWidget {
   }
 }
 
-// class _MileageInput extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocBuilder<FirstFormBloc, FirstFormState>(
-//       buildWhen: (previous, current) => previous.mileage != current.mileage,
-//       builder: (context, state) {
-//         return TextInputField(
-//           icon: Icons.directions_car,
-//           hint: "MILEAGE",
-//           inputType: TextInputType.number,
-//           suffixText: "KM",
-//           onTextChanged: (String mileage) => context
-//               .bloc<FirstFormBloc>()
-//               .add(ListingMileageChanged(int.parse(mileage))), // ?
-//         );
-//       },
-//     );
-//   }
-// }
-// TODO: Replace `TextInputField` with `TextPickerInputField`
+// TODO: Fix pickers data
 class _PriceInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FirstFormBloc, FirstFormState>(
       buildWhen: (previous, current) => previous.price != current.price,
       builder: (context, state) {
-        return TextInputField(
+        return TextPickerInputField(
+          textHint: "PRICE",
+          pickerHint: state.price.value.valute != null
+              ? state.price.value.valute.symbol
+              : 'VALUTE',
+          showOverviewHint: state.price.value.value != null,
+          picker: ListingValutesList(
+            onTap: (valute) {
+              context.bloc<FirstFormBloc>().add(ListingValuteChanged(valute));
+              Navigator.pop(context);
+            },
+          ),
           icon: Icons.directions_car,
-          hint: "PRICE",
-          showOverviewHint: state.price.value != 0,
           inputType: TextInputType.number,
           onTextChanged: (String price) => context
               .bloc<FirstFormBloc>()
-              .add(ListingPriceChanged(int.parse(price))), // ?
+              .add(ListingPriceChanged(int.parse(price))),
         );
       },
     );

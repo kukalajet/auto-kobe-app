@@ -12,9 +12,5 @@ class Date {
   });
 
   @override
-  // String toString() => '{ day: $day, month: $month, year: $year }';
-  // String toString() => '$day - $month - $year';
-  String toString() {
-    return '{ day: $day, month: $month, year: $year }';
-  }
+  String toString() => '$day / $month / $year';
 }

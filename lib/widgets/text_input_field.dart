@@ -56,7 +56,7 @@ class TextInputField extends StatelessWidget {
                   border: InputBorder.none,
                   prefixIcon: Icon(
                     icon,
-                    size: 28,
+                    size: 28.0,
                     color: Colors.black54,
                   ),
                   suffix: Padding(

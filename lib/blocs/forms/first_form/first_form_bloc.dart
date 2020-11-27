@@ -7,6 +7,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:model_repository/model_repository.dart';
+import 'package:valute_repository/valute_repository.dart';
 
 part 'first_form_event.dart';
 part 'first_form_state.dart';
@@ -25,7 +26,9 @@ class FirstFormBloc extends Bloc<FirstFormEvent, FirstFormState> {
     } else if (event is ListingPriceChanged) {
       yield _mapPriceChangedToState(event, state);
     } else if (event is ListingRegistrationChanged) {
-      _mapRegistrationChangedToState(event, state);
+      yield _mapRegistrationChangedToState(event, state);
+    } else if (event is ListingValuteChanged) {
+      yield _mapValuteChangedToState(event, state);
     }
   }
 
@@ -74,28 +77,13 @@ class FirstFormBloc extends Bloc<FirstFormEvent, FirstFormState> {
         ]));
   }
 
-  // FirstFormState _mapMileageChangedToState(
-  //   ListingMileageChanged event,
-  //   FirstFormState state,
-  // ) {
-  //   final mileage = MileageField.dirty(event.mileage);
-  //   return state.copyWith(
-  //       mileage: mileage,
-  //       status: Formz.validate([
-  //         state.brand,
-  //         state.model,
-  //         state.registration,
-  //         mileage,
-  //       ]));
-  // }
-
   FirstFormState _mapPriceChangedToState(
     ListingPriceChanged event,
     FirstFormState state,
   ) {
-    final price = PriceField.dirty(event.price);
+    final value = Price(value: event.price, valute: state.price.value.valute);
+    final price = PriceField.dirty(value);
     return state.copyWith(
-        // mileage: mileage,
         price: price,
         status: Formz.validate([
           state.brand,
@@ -105,10 +93,19 @@ class FirstFormBloc extends Bloc<FirstFormEvent, FirstFormState> {
         ]));
   }
 
-  // Stream<FirstFormState> _mapFirstFormSubmittedToState(
-  //   ListingFirstFormSubmitted event,
-  //   FirstFormState state,
-  // ) async* {
-  //   yield state.copyWith(status: FormzStatus.submissionSuccess);
-  // }
+  FirstFormState _mapValuteChangedToState(
+    ListingValuteChanged event,
+    FirstFormState state,
+  ) {
+    final value = Price(value: state.price.value.value, valute: event.valute);
+    final price = PriceField.dirty(value);
+    return state.copyWith(
+        price: price,
+        status: Formz.validate([
+          state.brand,
+          state.model,
+          state.registration,
+          price,
+        ]));
+  }
 }

@@ -1,7 +1,5 @@
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
-import 'package:model_repository/src/models/models.dart';
-
 import 'models/model.dart';
 
 class ModelRepository {

@@ -35,6 +35,8 @@ dependencies:
     path: packages/door_type_repository
   fuel_type_repository:
     path: packages/fuel_type_repository
+  valute_repository:
+    path: packages/valute_repository
 
 dev_dependencies:
   flutter_test:

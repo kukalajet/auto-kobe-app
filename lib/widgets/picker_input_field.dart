@@ -24,8 +24,7 @@ class PickerInputField extends StatelessWidget {
       width: size.width * 0.9,
       child: GestureDetector(
         onTap: () => showCupertinoModalBottomSheet(
-          expand: true,
-          bounce: true,
+          expand: false,
           context: context,
           backgroundColor: Colors.transparent,
           builder: (context, scrollController) => picker,

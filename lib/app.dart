@@ -13,6 +13,7 @@ import 'package:auto_kobe/screens/screens.dart';
 import 'package:model_repository/model_repository.dart';
 import 'package:door_type_repository/door_type_repository.dart';
 import 'package:fuel_type_repository/fuel_type_repository.dart';
+import 'package:valute_repository/valute_repository.dart';
 
 class App extends StatelessWidget {
   const App({
@@ -24,6 +25,7 @@ class App extends StatelessWidget {
     @required this.countryRepository,
     @required this.doorTypeRepository,
     @required this.fuelTypeRepository,
+    @required this.valuteRepository,
   })  : assert(authenticationRepository != null),
         assert(listingRepository != null),
         assert(brandRepository != null),
@@ -31,6 +33,7 @@ class App extends StatelessWidget {
         assert(countryRepository != null),
         assert(doorTypeRepository != null),
         assert(fuelTypeRepository != null),
+        assert(valuteRepository != null),
         super(key: key);
 
   final AuthenticationRepository authenticationRepository;
@@ -40,6 +43,7 @@ class App extends StatelessWidget {
   final CountryRepository countryRepository;
   final DoorTypeRepository doorTypeRepository;
   final FuelTypeRepository fuelTypeRepository;
+  final ValuteRepository valuteRepository;
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +71,9 @@ class App extends StatelessWidget {
         RepositoryProvider<FuelTypeRepository>(
           create: (_) => fuelTypeRepository,
         ),
+        RepositoryProvider<ValuteRepository>(
+          create: (_) => valuteRepository,
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -93,6 +100,9 @@ class App extends StatelessWidget {
           BlocProvider<FuelTypeBloc>(
             create: (_) => FuelTypeBloc(fuelTypeRepository: fuelTypeRepository),
           ),
+          BlocProvider<ValuteBloc>(
+            create: (_) => ValuteBloc(valuteRepository: valuteRepository),
+          ),
         ],
         child: AppView(),
       ),
@@ -113,6 +123,7 @@ class _AppViewState extends State<AppView> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // theme: ThemeData(platform: TargetPlatform.iOS),
       theme: theme,
       navigatorKey: _navigatorKey,
       builder: (context, child) {

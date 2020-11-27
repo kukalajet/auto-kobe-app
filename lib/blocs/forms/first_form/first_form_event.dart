@@ -34,15 +34,6 @@ class ListingRegistrationChanged extends FirstFormEvent {
   List<Object> get props => [registration];
 }
 
-// class ListingMileageChanged extends FirstFormEvent {
-//   const ListingMileageChanged(this.mileage);
-
-//   final int mileage;
-
-//   @override
-//   List<Object> get props => [mileage];
-// }
-
 class ListingPriceChanged extends FirstFormEvent {
   const ListingPriceChanged(this.price);
 
@@ -52,6 +43,11 @@ class ListingPriceChanged extends FirstFormEvent {
   List<Object> get props => [price];
 }
 
-// class ListingFirstFormSubmitted extends FirstFormEvent {
-//   const ListingFirstFormSubmitted();
-// }
+class ListingValuteChanged extends FirstFormEvent {
+  const ListingValuteChanged(this.valute);
+
+  final Valute valute;
+
+  @override
+  List<Object> get props => [valute];
+}

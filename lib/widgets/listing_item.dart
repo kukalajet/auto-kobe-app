@@ -19,6 +19,7 @@ class ListingItem extends StatelessWidget {
       subtitle: Text(listing.body),
       dense: true,
       onTap: () => showCupertinoModalBottomSheet(
+        expand: false,
         context: context,
         builder: (context, scrollController) => ListingDetail(listing),
       ),

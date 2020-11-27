@@ -13,6 +13,7 @@ import 'package:brand_repository/brand_repository.dart';
 import 'package:model_repository/model_repository.dart';
 import 'package:door_type_repository/door_type_repository.dart';
 import 'package:fuel_type_repository/fuel_type_repository.dart';
+import 'package:valute_repository/valute_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,6 +30,7 @@ void main() async {
       countryRepository: CountryRepository(),
       doorTypeRepository: DoorTypeRepository(),
       fuelTypeRepository: FuelTypeRepository(),
+      valuteRepository: ValuteRepository(httpClient: client),
     ),
   );
 }
