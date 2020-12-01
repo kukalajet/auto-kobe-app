@@ -35,8 +35,10 @@ class _ListingValutesListState extends State<ListingValutesList> {
             if (state.valutes.isEmpty) {
               return const Center(child: Text('no types'));
             }
-            return Scaffold(
-              body: Column(
+            return Container(
+              decoration: BoxDecoration(color: Colors.indigo[50]),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: List.generate(state.valutes.length, (index) {
                   return _ValuteItem(
                     valute: state.valutes[index],
@@ -65,12 +67,18 @@ class _ValuteItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final textTheme = Theme.of(context).textTheme;
-    return ListTile(
-      title: Text(valute.name),
-      trailing: Text(valute.symbol),
-      dense: true,
+    return GestureDetector(
       onTap: () => onTap(valute),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(valute.name, style: TextStyle(color: Colors.black87)),
+            Text(valute.symbol, style: TextStyle(color: Colors.black87)),
+          ],
+        ),
+      ),
     );
   }
 }

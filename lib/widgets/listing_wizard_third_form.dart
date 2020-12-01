@@ -63,13 +63,11 @@ class _FuelInput extends StatelessWidget {
           icon: Icons.access_time,
           hint: 'FUEL TYPE',
           value: state.fuel.value.type,
-          picker: Scaffold(
-            body: ListingFuelTypesList(
-              onTap: (type) {
-                context.bloc<ThirdFormBloc>().add(ListingFuelChanged(type));
-                Navigator.pop(context);
-              },
-            ),
+          picker: ListingFuelTypesList(
+            onTap: (type) {
+              context.bloc<ThirdFormBloc>().add(ListingFuelChanged(type));
+              Navigator.pop(context);
+            },
           ),
         );
       },

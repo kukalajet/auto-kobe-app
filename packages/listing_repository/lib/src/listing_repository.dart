@@ -26,4 +26,13 @@ class ListingRepository {
     }
     throw Exception('error fetching posts');
   }
+
+  Future<List<SearchType>> fetchSearchTypes() async {
+    List<SearchType> _types = [
+      SearchType(id: 0, title: 'Latest'),
+      SearchType(id: 1, title: 'Trending'),
+    ];
+
+    return _types;
+  }
 }

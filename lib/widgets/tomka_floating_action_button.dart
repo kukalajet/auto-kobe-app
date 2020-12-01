@@ -11,6 +11,7 @@ class TomkaFloatingActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      // mini: true,
       onPressed: () => onPressed(),
       elevation: 5,
       backgroundColor: Colors.transparent,
@@ -32,9 +33,9 @@ class TomkaFloatingActionButton extends StatelessWidget {
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.red.shade50,
-              blurRadius: 10.0,
-              spreadRadius: 5.0,
+              color: Colors.indigoAccent,
+              blurRadius: 2.0,
+              spreadRadius: 2.0,
               offset: Offset(0.0, 0.0),
             ),
           ],

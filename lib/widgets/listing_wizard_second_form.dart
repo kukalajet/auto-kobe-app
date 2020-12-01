@@ -67,13 +67,11 @@ class _DoorTypeInput extends StatelessWidget {
           icon: Icons.add_link,
           hint: 'NUMBER OF DOORS',
           value: state.doors.value.number,
-          picker: Scaffold(
-            body: ListingDoorTypeList(
-              onTap: (doors) {
-                context.bloc<SecondFormBloc>().add(ListingDoorsChanged(doors));
-                Navigator.pop(context);
-              },
-            ),
+          picker: ListingDoorTypeList(
+            onTap: (doors) {
+              context.bloc<SecondFormBloc>().add(ListingDoorsChanged(doors));
+              Navigator.pop(context);
+            },
           ),
         );
       },

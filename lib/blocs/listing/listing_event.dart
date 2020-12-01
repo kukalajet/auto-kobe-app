@@ -8,3 +8,14 @@ abstract class ListingEvent extends Equatable {
 }
 
 class ListingFetched extends ListingEvent {}
+
+class ListingSearchTypeFetched extends ListingEvent {}
+
+class ListingSearchTypeChanged extends ListingEvent {
+  const ListingSearchTypeChanged(this.type);
+
+  final SearchType type;
+
+  @override
+  List<Object> get props => [type];
+}

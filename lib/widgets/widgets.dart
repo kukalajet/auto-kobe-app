@@ -11,6 +11,8 @@ export 'listing_item.dart';
 export 'listing_detail.dart';
 export 'picker_input_field.dart';
 export 'text_picker_input_field.dart';
+export 'search_button.dart'; // TODO: RENAME?
+export 'feed_type_button.dart'; // TODO: RENAME?
 export 'type_picker.dart';
 export 'text_input_field.dart';
 export 'image_picker_input.dart';

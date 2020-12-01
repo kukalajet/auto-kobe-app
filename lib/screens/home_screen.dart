@@ -15,7 +15,6 @@ class HomeScreen extends StatelessWidget {
 
   final List<Widget> _tabs = [
     FeedTab(),
-    // Scaffold(body: Text("Create")),
     Scaffold(
       body: SafeArea(
         child: Center(
@@ -32,27 +31,67 @@ class HomeScreen extends StatelessWidget {
         return Scaffold(
           // `IndexedStack` is used to keep state in tabs. If possible, look
           // for a better solution. @Jeton
-          body: IndexedStack(
-            index: activeTab.index,
-            children: _tabs,
+          body: Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  colors: [Color(0xFF282a57), Colors.black],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter),
+            ),
+            child: IndexedStack(
+              index: activeTab.index,
+              children: _tabs,
+            ),
           ),
-          bottomNavigationBar: TabSelector(
-            activeTab: activeTab,
-            onTabSelected: (tab) =>
-                BlocProvider.of<TabBloc>(context).add(TabUpdated(tab)),
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(50.0),
+            child: AppBar(
+              backgroundColor: Colors.transparent,
+              bottomOpacity: 0.0,
+              elevation: 0.0,
+              centerTitle: true,
+              title: Text(
+                'Tomka',
+                style: TextStyle(color: Colors.indigoAccent),
+              ),
+              leading: IconButton(
+                icon: Icon(Icons.ac_unit),
+                color: Colors.indigoAccent,
+                onPressed: () {},
+              ),
+              actions: [
+                IconButton(
+                  icon: Icon(
+                    Icons.supervised_user_circle,
+                    color: Colors.indigoAccent,
+                  ),
+                  onPressed: () {},
+                ),
+              ],
+            ),
+          ),
+          bottomNavigationBar: SizedBox(
+            height: 50,
+            child: TabSelector(
+              activeTab: activeTab,
+              onTabSelected: (tab) =>
+                  BlocProvider.of<TabBloc>(context).add(TabUpdated(tab)),
+            ),
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.miniCenterDocked,
-          floatingActionButton: TomkaFloatingActionButton(onPressed: () {
-            // showMaterialModalBottomSheet(
-            showCupertinoModalBottomSheet(
-              expand: true,
-              // bounce: true,
-              context: context,
-              backgroundColor: Colors.transparent,
-              builder: (context, scrollController) => ListingCreationScreen(),
-            );
-          }),
+          floatingActionButton: TomkaFloatingActionButton(
+            onPressed: () {
+              showCupertinoModalBottomSheet(
+                expand: true,
+                context: context,
+                backgroundColor: Colors.transparent,
+                builder: (context, scrollController) => ListingCreationScreen(),
+              );
+            },
+          ),
         );
       },
     );

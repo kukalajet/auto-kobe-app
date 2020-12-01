@@ -1,5 +1,4 @@
 import 'package:auto_kobe/blocs/door_type/door_type.dart';
-import 'package:auto_kobe/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:door_type_repository/door_type_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,16 +35,17 @@ class _ListingDoorTypeListState extends State<ListingDoorTypeList> {
             if (state.types.isEmpty) {
               return const Center(child: Text('no types'));
             }
-            return ListView.builder(
-              itemCount: state.types.length,
-              itemBuilder: (BuildContext context, int index) {
-                return index >= state.types.length
-                    ? BottomLoader()
-                    : _DoorTypeItem(
-                        type: state.types[index],
-                        onTap: widget.onTap,
-                      );
-              },
+            return Container(
+              decoration: BoxDecoration(color: Colors.indigo[50]),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: List.generate(state.types.length, (index) {
+                  return _DoorTypeItem(
+                    type: state.types[index],
+                    onTap: widget.onTap,
+                  );
+                }),
+              ),
             );
           default:
             return const Center(child: CircularProgressIndicator());
@@ -67,12 +67,17 @@ class _DoorTypeItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final textTheme = Theme.of(context).textTheme;
-    return ListTile(
-      title: Text(type.number),
-      // isThreeLine: true,
-      dense: true,
+    return GestureDetector(
       onTap: () => onTap(type),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(type.number, style: TextStyle(color: Colors.black87)),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_kobe/blocs/blocs.dart';
-import 'package:auto_kobe/widgets/widgets.dart';
 import 'package:fuel_type_repository/fuel_type_repository.dart';
 
 class ListingFuelTypesList extends StatefulWidget {
@@ -36,16 +35,17 @@ class _ListingFuelTypesListState extends State<ListingFuelTypesList> {
             if (state.types.isEmpty) {
               return const Center(child: Text('no types'));
             }
-            return ListView.builder(
-              itemCount: state.types.length,
-              itemBuilder: (BuildContext context, int index) {
-                return index >= state.types.length
-                    ? BottomLoader()
-                    : _FuelItem(
-                        fuel: state.types[index],
-                        onTap: widget.onTap,
-                      );
-              },
+            return Container(
+              decoration: BoxDecoration(color: Colors.indigo[50]),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: List.generate(state.types.length, (index) {
+                  return _FuelItem(
+                    fuel: state.types[index],
+                    onTap: widget.onTap,
+                  );
+                }),
+              ),
             );
           default:
             return const Center(child: CircularProgressIndicator());
@@ -67,11 +67,17 @@ class _FuelItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final textTheme = Theme.of(context).textTheme;
-    return ListTile(
-      title: Text(fuel.type),
-      dense: true,
+    return GestureDetector(
       onTap: () => onTap(fuel),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(fuel.type, style: TextStyle(color: Colors.black87)),
+          ],
+        ),
+      ),
     );
   }
 }

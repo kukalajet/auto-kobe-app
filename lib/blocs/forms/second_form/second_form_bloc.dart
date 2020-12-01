@@ -56,21 +56,6 @@ class SecondFormBloc extends Bloc<SecondFormEvent, SecondFormState> {
     );
   }
 
-  // SecondFormState _mapSeatsChangedToState(
-  //   ListingSeatsChanged event,
-  //   SecondFormState state,
-  // ) {
-  //   final seats = SeatsField.dirty(event.seats);
-  //   return state.copyWith(
-  //     seats: seats,
-  //     status: Formz.validate([
-  //       state.country,
-  //       state.doors,
-  //       seats,
-  //     ]),
-  //   );
-  // }
-
   SecondFormState _mapMileageChangedToState(
     ListingMileageChanged event,
     SecondFormState state,

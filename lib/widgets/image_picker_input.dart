@@ -105,6 +105,7 @@ class _ImagePickerInputState extends State<ImagePickerInput> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Widget _AddImageButton() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 40.0),
