@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:auto_kobe/app.dart';
 import 'package:auto_kobe/blocs/simple_bloc_observer.dart';
@@ -21,9 +22,11 @@ void main() async {
   EquatableConfig.stringify = kDebugMode;
   Bloc.observer = SimpleBlocObserver();
   final client = http.Client();
+  final storage = new FlutterSecureStorage();
   runApp(
     App(
-      authenticationRepository: AuthenticationRepository(),
+      authenticationRepository:
+          AuthenticationRepository(httpClient: client, storage: storage),
       listingRepository: ListingRepository(httpClient: client),
       brandRepository: BrandRepository(httpClient: client),
       modelRepository: ModelRepository(httpClient: client),

@@ -21,6 +21,7 @@ dependencies:
   intl:
   flutter_datetime_picker: ^1.4.0
   image_picker: ^0.6.7+14
+  flutter_secure_storage: ^3.3.5
   authentication_repository:
     path: packages/authentication_repository
   listing_repository:

@@ -1,5 +1,5 @@
 import 'package:auto_kobe/blocs/blocs.dart';
-import 'package:auto_kobe/widgets/listing_fuel_types_list.dart';
+import 'package:auto_kobe/widgets/lists/listing_fuel_types_list.dart';
 import 'package:auto_kobe/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

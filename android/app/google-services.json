@@ -1,21 +1,20 @@
 {
   "project_info": {
-    "project_number": "621576282107",
-    "firebase_url": "https://auto-kobe.firebaseio.com",
-    "project_id": "auto-kobe",
-    "storage_bucket": "auto-kobe.appspot.com"
+    "project_number": "406562258068",
+    "project_id": "tomka-1607081208844",
+    "storage_bucket": "tomka-1607081208844.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:621576282107:android:7da2f77e4831825275355e",
+        "mobilesdk_app_id": "1:406562258068:android:08e49ce3704c701450c881",
         "android_client_info": {
           "package_name": "com.example.auto_kobe"
         }
       },
       "oauth_client": [
         {
-          "client_id": "621576282107-ulphg6si7iturc0ag5b6poib64biu47n.apps.googleusercontent.com",
+          "client_id": "406562258068-j930hbieq00mrh68mc5ls9h2j2hf6455.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.auto_kobe",
@@ -23,20 +22,20 @@
           }
         },
         {
-          "client_id": "621576282107-5a4hbb4v60eo3vpmeabkskdfp79e748r.apps.googleusercontent.com",
+          "client_id": "406562258068-7bf8fj6qegcligt0e88dha205h36u6md.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA0Xj3DFwZpXVg18y49uQe_5BmJKIiOwzM"
+          "current_key": "AIzaSyBWDOIs98ykbZSQ5D_6Gjs0Z9a3KW2Zbao"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "621576282107-5a4hbb4v60eo3vpmeabkskdfp79e748r.apps.googleusercontent.com",
+              "client_id": "406562258068-7bf8fj6qegcligt0e88dha205h36u6md.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

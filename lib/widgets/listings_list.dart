@@ -9,15 +9,23 @@ class ListingsList extends StatefulWidget {
   _ListingsListState createState() => _ListingsListState();
 }
 
-class _ListingsListState extends State<ListingsList> {
+class _ListingsListState extends State<ListingsList>
+    // TESTING
+    with
+        TickerProviderStateMixin {
   final _scrollController = ScrollController(initialScrollOffset: 1.0);
   ListingBloc _listingBloc;
+
+  // TESTING
+  AnimationController animationController;
 
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
     _listingBloc = context.bloc<ListingBloc>()..add(ListingSearchTypeFetched());
+    animationController = AnimationController(
+        duration: const Duration(milliseconds: 1000), vsync: this);
   }
 
   @override
@@ -101,6 +109,7 @@ class _ListingsListState extends State<ListingsList> {
                 SliverList(
                   delegate: SliverChildListDelegate([
                     ListView.builder(
+                      // ListView.separated(
                       shrinkWrap: true,
                       controller: _scrollController,
                       itemBuilder: (BuildContext context, int index) {
@@ -111,6 +120,7 @@ class _ListingsListState extends State<ListingsList> {
                       itemCount: state.hasReachedMax
                           ? state.listings.length
                           : state.listings.length + 1,
+                      // separatorBuilder: (context, index) => Divider(),
                     ),
                   ]),
                 ),

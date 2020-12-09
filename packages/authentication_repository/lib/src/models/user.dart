@@ -31,6 +31,22 @@ class User extends Equatable {
   /// Empty user which represents an unauthenticated user.
   static const empty = User(email: '', id: '', name: null, photo: null);
 
+  // ignore: sort_constructors_first
+  factory User.fromJson(dynamic json) {
+    return User(
+      email: json['email'] as String,
+      id: json['id'] as String,
+      name: json['name'] as String,
+      photo: json['photo'] as String,
+    );
+  }
+
+  @override
+  String toString() {
+    // ignore: lines_longer_than_80_chars
+    return '{ "email": "$email", "id": "$id", "name": "$name", "photo": "$photo"  }';
+  }
+
   @override
   List<Object> get props => [email, id, name, photo];
 }

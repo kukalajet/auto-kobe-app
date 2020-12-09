@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
               elevation: 0.0,
               centerTitle: true,
               title: Text(
-                'Tomka',
+                'Auto24',
                 style: TextStyle(color: Colors.indigoAccent),
               ),
               leading: IconButton(

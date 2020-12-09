@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:auto_kobe/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -18,7 +19,7 @@ class _ImagePickerInputState extends State<ImagePickerInput> {
     _images = [];
   }
 
-  Future getImage() async {
+  Future _getImage() async {
     final file = await picker.getImage(source: ImageSource.gallery);
     setState(() => _images.add(File(file.path)));
   }
@@ -29,7 +30,7 @@ class _ImagePickerInputState extends State<ImagePickerInput> {
       textColor: Colors.white,
       color: const Color(0xffaabbcc),
       child: Text("PICK IMAGE"),
-      onPressed: getImage,
+      onPressed: _getImage,
       shape: new RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30.0),
       ),
@@ -110,7 +111,7 @@ class _ImagePickerInputState extends State<ImagePickerInput> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 40.0),
       child: ElevatedButton(
-        onPressed: getImage,
+        onPressed: _getImage,
         style: ElevatedButton.styleFrom(
           primary: const Color(0xffaabbcc),
           shape: CircleBorder(),
