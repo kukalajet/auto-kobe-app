@@ -93,6 +93,21 @@ class _ListingDetailState extends State<ListingDetail> {
                         );
                       }).toList(),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 16.0, top: 215.0),
+                      child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: MaterialButton(
+                          onPressed: () => null,
+                          color: Colors.redAccent.withOpacity(0.75),
+                          textColor: Colors.white70,
+                          child: Icon(Icons.favorite, size: 24),
+                          padding: EdgeInsets.all(8.0),
+                          shape: CircleBorder(),
+                          minWidth: 0.0,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 Container(
@@ -111,8 +126,7 @@ class _ListingDetailState extends State<ListingDetail> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      widget
-                                          .listing.model.name, // + listing.id,
+                                      widget.listing.model.name,
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 32.0,
@@ -130,14 +144,13 @@ class _ListingDetailState extends State<ListingDetail> {
                                     ),
                                   ],
                                 ),
-                                MaterialButton(
-                                  onPressed: () => null,
-                                  color: Colors.blue.withOpacity(0.8),
-                                  textColor: Colors.white70,
-                                  child: Icon(Icons.favorite, size: 24),
-                                  padding: EdgeInsets.all(8.0),
-                                  shape: CircleBorder(),
-                                  minWidth: 0.0,
+                                Text(
+                                  '${widget.listing.price.value.toString()} ${widget.listing.price.valute.symbol}',
+                                  style: TextStyle(
+                                    color: Colors.black87,
+                                    fontSize: 40.0,
+                                    fontWeight: FontWeight.w900,
+                                  ),
                                 ),
                               ],
                             ),
@@ -166,12 +179,13 @@ class _ListingDetailState extends State<ListingDetail> {
                               ),
                             ),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Text(
                                   widget.listing.model.name, // + listing.id,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 32.0,
+                                    fontSize: 24.0,
                                     color: Colors.black87,
                                   ),
                                 ),
@@ -179,19 +193,20 @@ class _ListingDetailState extends State<ListingDetail> {
                                   widget.listing.model.name, // + listing.id,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 32.0,
-                                    color: Colors.black87,
+                                    fontSize: 24.0,
+                                    color: Colors.black54,
                                   ),
                                 ),
                               ],
                             ),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Text(
                                   widget.listing.model.name, // + listing.id,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 32.0,
+                                    fontSize: 24.0,
                                     color: Colors.black87,
                                   ),
                                 ),
@@ -199,8 +214,176 @@ class _ListingDetailState extends State<ListingDetail> {
                                   widget.listing.model.name, // + listing.id,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 32.0,
+                                    fontSize: 24.0,
+                                    color: Colors.black54,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  widget.listing.model.name, // + listing.id,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24.0,
                                     color: Colors.black87,
+                                  ),
+                                ),
+                                Text(
+                                  widget.listing.model.name, // + listing.id,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24.0,
+                                    color: Colors.black54,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  widget.listing.model.name, // + listing.id,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24.0,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                                Text(
+                                  widget.listing.model.name, // + listing.id,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24.0,
+                                    color: Colors.black54,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  widget.listing.model.name, // + listing.id,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24.0,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                                Text(
+                                  widget.listing.model.name, // + listing.id,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24.0,
+                                    color: Colors.black54,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  widget.listing.model.name, // + listing.id,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24.0,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                                Text(
+                                  widget.listing.model.name, // + listing.id,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24.0,
+                                    color: Colors.black54,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  widget.listing.model.name, // + listing.id,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24.0,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                                Text(
+                                  widget.listing.model.name, // + listing.id,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24.0,
+                                    color: Colors.black54,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  widget.listing.model.name, // + listing.id,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24.0,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                                Text(
+                                  widget.listing.model.name, // + listing.id,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24.0,
+                                    color: Colors.black54,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  widget.listing.model.name, // + listing.id,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24.0,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                                Text(
+                                  widget.listing.model.name, // + listing.id,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24.0,
+                                    color: Colors.black54,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  widget.listing.model.name, // + listing.id,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24.0,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                                Text(
+                                  widget.listing.model.name, // + listing.id,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24.0,
+                                    color: Colors.black54,
                                   ),
                                 ),
                               ],

@@ -33,7 +33,7 @@ class ListingRepository {
       fuelType: Fuel(id: 0, type: FuelType.Electric),
       motorPower: 1,
       description:
-          'Shiten Toyota Highlander hybrid viti 2009 13500 eu full extra me letra,Toyota Prius viti 2010 8300 eu.viti 2011 me tavan panoramik me panel diellor 7500 eu me targa te huaja,viti 2013 pluguin hibrid 1.8 l per 100km ,pershkruan edhe 50 km vetem me motor elektrik,karikim elektrik 9200 eu me targa te huaja,ML 2013,350 blue tec turbo disel full ekstra 15500 eu pa dogane,2013 VOLKSWAGEN PASSAT TDI SE W/SUNROOF N 1VWBN7A38DC109318 8500 eu pa dogane.GL 2009 Blue tec full extra me dog dhe sig te paguar 13500 eu',
+          'Shiten Toyota Highlander hybrid viti 2009 13500 eu full extra me letra,Toyota Prius viti 2010 8300 eu.viti 2011 me tavan panoramik me panel diellor 7500 eu me targa te huaja,viti 2013 pluguin hibrid 1.8 l per 100km ,pershkruan edhe 50 km vetem me motor elektrik',
       status: ListingStatus.Available,
       images: [
         'https://www.tesla.com/assets/img/ms_fb_s.jpg',
@@ -57,7 +57,7 @@ class ListingRepository {
       fuelType: Fuel(id: 0, type: FuelType.Electric),
       motorPower: 1,
       description:
-          'Shiten Toyota Highlander hybrid viti 2009 13500 eu full extra me letra,Toyota Prius viti 2010 8300 eu.viti 2011 me tavan panoramik me panel diellor 7500 eu me targa te huaja,viti 2013 pluguin hibrid 1.8 l per 100km ,pershkruan edhe 50 km vetem me motor elektrik,karikim elektrik 9200 eu me targa te huaja,ML 2013,350 blue tec turbo disel full ekstra 15500 eu pa dogane,2013 VOLKSWAGEN PASSAT TDI SE W/SUNROOF N 1VWBN7A38DC109318 8500 eu pa dogane.GL 2009 Blue tec full extra me dog dhe sig te paguar 13500 eu',
+          'Shiten Toyota Highlander hybrid viti 2009 13500 eu full extra me letra,Toyota Prius viti 2010 8300 eu.viti 2011 me tavan panoramik me panel diellor 7500 eu me targa te huaja,viti 2013 pluguin hibrid 1.8 l per 100km ,pershkruan edhe 50 km vetem me motor elektrik',
       status: ListingStatus.Available,
       images: [
         'https://www.tesla.com/assets/img/ms_fb_s.jpg',
@@ -81,7 +81,7 @@ class ListingRepository {
       fuelType: Fuel(id: 0, type: FuelType.Electric),
       motorPower: 1,
       description:
-          'Shiten Toyota Highlander hybrid viti 2009 13500 eu full extra me letra,Toyota Prius viti 2010 8300 eu.viti 2011 me tavan panoramik me panel diellor 7500 eu me targa te huaja,viti 2013 pluguin hibrid 1.8 l per 100km ,pershkruan edhe 50 km vetem me motor elektrik,karikim elektrik 9200 eu me targa te huaja,ML 2013,350 blue tec turbo disel full ekstra 15500 eu pa dogane,2013 VOLKSWAGEN PASSAT TDI SE W/SUNROOF N 1VWBN7A38DC109318 8500 eu pa dogane.GL 2009 Blue tec full extra me dog dhe sig te paguar 13500 eu',
+          'Shiten Toyota Highlander hybrid viti 2009 13500 eu full extra me letra,Toyota Prius viti 2010 8300 eu.viti 2011 me tavan panoramik me panel diellor 7500 eu me targa te huaja,viti 2013 pluguin hibrid 1.8 l per 100km ,pershkruan edhe 50 km vetem me motor elektrik',
       status: ListingStatus.Available,
       images: [
         'https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/Models.jpg',
@@ -103,7 +103,7 @@ class ListingRepository {
       fuelType: Fuel(id: 0, type: FuelType.Electric),
       motorPower: 1,
       description:
-          'Shiten Toyota Highlander hybrid viti 2009 13500 eu full extra me letra,Toyota Prius viti 2010 8300 eu.viti 2011 me tavan panoramik me panel diellor 7500 eu me targa te huaja,viti 2013 pluguin hibrid 1.8 l per 100km ,pershkruan edhe 50 km vetem me motor elektrik,karikim elektrik 9200 eu me targa te huaja,ML 2013,350 blue tec turbo disel full ekstra 15500 eu pa dogane,2013 VOLKSWAGEN PASSAT TDI SE W/SUNROOF N 1VWBN7A38DC109318 8500 eu pa dogane.GL 2009 Blue tec full extra me dog dhe sig te paguar 13500 eu',
+          'Shiten Toyota Highlander hybrid viti 2009 13500 eu full extra me letra,Toyota Prius viti 2010 8300 eu.viti 2011 me tavan panoramik me panel diellor 7500 eu me targa te huaja,viti 2013 pluguin hibrid 1.8 l per 100km ,pershkruan edhe 50 km vetem me motor elektrik',
       status: ListingStatus.Available,
       images: [
         'https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/Models.jpg',
@@ -127,7 +127,7 @@ class ListingRepository {
       fuelType: Fuel(id: 0, type: FuelType.Electric),
       motorPower: 1,
       description:
-          'Shiten Toyota Highlander hybrid viti 2009 13500 eu full extra me letra,Toyota Prius viti 2010 8300 eu.viti 2011 me tavan panoramik me panel diellor 7500 eu me targa te huaja,viti 2013 pluguin hibrid 1.8 l per 100km ,pershkruan edhe 50 km vetem me motor elektrik,karikim elektrik 9200 eu me targa te huaja,ML 2013,350 blue tec turbo disel full ekstra 15500 eu pa dogane,2013 VOLKSWAGEN PASSAT TDI SE W/SUNROOF N 1VWBN7A38DC109318 8500 eu pa dogane.GL 2009 Blue tec full extra me dog dhe sig te paguar 13500 eu',
+          'Shiten Toyota Highlander hybrid viti 2009 13500 eu full extra me letra,Toyota Prius viti 2010 8300 eu.viti 2011 me tavan panoramik me panel diellor 7500 eu me targa te huaja,viti 2013 pluguin hibrid 1.8 l per 100km ,pershkruan edhe 50 km vetem me motor elektrik',
       status: ListingStatus.Available,
       images: [
         'https://i0.wp.com/www.insidehr.com.au/wp-content/uploads/2018/09/Tesla-model-S-P100D-min.jpg?fit=1000%2C500&ssl=1',
