@@ -62,7 +62,9 @@ class _FuelInput extends StatelessWidget {
         return PickerInputField(
           icon: Icons.access_time,
           hint: 'FUEL TYPE',
-          value: state.fuel.value.type,
+          value: state.fuel.value.type != null
+              ? state.fuel.value.type.toString().split('.').last
+              : null,
           picker: ListingFuelTypesList(
             onTap: (type) {
               context.bloc<ThirdFormBloc>().add(ListingFuelChanged(type));

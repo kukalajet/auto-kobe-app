@@ -5,6 +5,7 @@ import 'package:auto_kobe/blocs/blocs.dart';
 import 'package:auto_kobe/widgets/widgets.dart';
 import 'package:door_type_repository/door_type_repository.dart';
 import 'package:fuel_type_repository/fuel_type_repository.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:model_repository/model_repository.dart';
 import 'package:brand_repository/brand_repository.dart';
 import 'package:country_repository/country_repository.dart';
@@ -12,71 +13,58 @@ import 'package:country_repository/country_repository.dart';
 class ListingCreationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: kWhite,
-      body: MultiBlocProvider(
-        providers: [
-          BlocProvider<ListingWizardBloc>(
-            create: (_) => ListingWizardBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ListingWizardBloc>(
+          create: (_) => ListingWizardBloc(),
+        ),
+        BlocProvider<FirstFormBloc>(
+          create: (_) => FirstFormBloc(),
+        ),
+        BlocProvider<SecondFormBloc>(
+          create: (_) => SecondFormBloc(),
+        ),
+        BlocProvider<ThirdFormBloc>(
+          create: (_) => ThirdFormBloc(),
+        ),
+        BlocProvider<BrandBloc>(
+          create: (_) => BrandBloc(
+            brandRepository: RepositoryProvider.of<BrandRepository>(context),
+          )
+            ..add(BrandFetched())
+            ..add(BrandFavoriteFetched()),
+        ),
+        BlocProvider<ModelBloc>(
+          create: (_) => ModelBloc(
+            modelRepository: RepositoryProvider.of<ModelRepository>(context),
           ),
-          BlocProvider<FirstFormBloc>(
-            create: (_) => FirstFormBloc(),
+        ),
+        BlocProvider<CountryBloc>(
+          create: (_) => CountryBloc(
+            countryRepository:
+                RepositoryProvider.of<CountryRepository>(context),
           ),
-          BlocProvider<SecondFormBloc>(
-            create: (_) => SecondFormBloc(),
+        ),
+        BlocProvider<DoorTypeBloc>(
+          create: (context) => DoorTypeBloc(
+            doorTypeRepository:
+                RepositoryProvider.of<DoorTypeRepository>(context),
           ),
-          BlocProvider<ThirdFormBloc>(
-            create: (_) => ThirdFormBloc(),
+        ),
+        BlocProvider<FuelTypeBloc>(
+          create: (context) => FuelTypeBloc(
+            fuelTypeRepository:
+                RepositoryProvider.of<FuelTypeRepository>(context),
           ),
-          BlocProvider<BrandBloc>(
-            create: (_) => BrandBloc(
-              brandRepository: RepositoryProvider.of<BrandRepository>(context),
-            )
-              ..add(BrandFetched())
-              ..add(BrandFavoriteFetched()),
-          ),
-          BlocProvider<ModelBloc>(
-            create: (_) => ModelBloc(
-              modelRepository: RepositoryProvider.of<ModelRepository>(context),
-            ),
-          ),
-          BlocProvider<CountryBloc>(
-            create: (_) => CountryBloc(
-              countryRepository:
-                  RepositoryProvider.of<CountryRepository>(context),
-            ),
-          ),
-          BlocProvider<DoorTypeBloc>(
-            create: (context) => DoorTypeBloc(
-              doorTypeRepository:
-                  RepositoryProvider.of<DoorTypeRepository>(context),
-            ),
-          ),
-          BlocProvider<FuelTypeBloc>(
-            create: (context) => FuelTypeBloc(
-              fuelTypeRepository:
-                  RepositoryProvider.of<FuelTypeRepository>(context),
-            ),
-          ),
-        ],
-        child: BlocConsumer<ListingWizardBloc, ListingWizardState>(
-          listener: (context, state) {
-            if (state.firstForm.valid) {
-              Scaffold.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(
-                    const SnackBar(content: const Text('FIRST_FORM PASSED')));
-            }
-            if (state.secondForm.valid) {
-              Scaffold.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(
-                    const SnackBar(content: const Text('SECOND_FORM PASSED')));
-            }
-          },
-          builder: (context, state) {
-            return SizedBox.expand(
-              child: SingleChildScrollView(
+        ),
+      ],
+      child: Material(
+        child: CupertinoScaffold(
+          transitionBackgroundColor: kWhite,
+          body: BlocConsumer<ListingWizardBloc, ListingWizardState>(
+            listener: (context, state) {},
+            builder: (context, state) {
+              return SingleChildScrollView(
                 primary: true,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -105,13 +93,14 @@ class ListingCreationScreen extends StatelessWidget {
                           ? ImagePickerInput()
                           : SizedBox(),
                     ),
+                    SizedBox(height: 16.0),
                   ],
                 ),
-              ),
-            );
-          },
-          buildWhen: (previousState, currentState) =>
-              previousState != currentState,
+              );
+            },
+            buildWhen: (previousState, currentState) =>
+                previousState != currentState,
+          ),
         ),
       ),
     );

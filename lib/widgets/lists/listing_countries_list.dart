@@ -37,6 +37,7 @@ class _ListingCountriesListState extends State<ListingCountriesList> {
               return const Center(child: Text('no types'));
             }
             return ListView.builder(
+              shrinkWrap: true,
               itemCount: state.countries.length,
               itemBuilder: (BuildContext context, int index) {
                 return index >= state.countries.length
@@ -67,11 +68,18 @@ class _CountryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final textTheme = Theme.of(context).textTheme;
-    return ListTile(
-      title: Text(country.name),
-      dense: true,
+    return GestureDetector(
       onTap: () => onTap(country),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(country.name, style: TextStyle(color: Colors.black87)),
+            Image.network(country.image, height: 50, fit: BoxFit.fill),
+          ],
+        ),
+      ),
     );
   }
 }

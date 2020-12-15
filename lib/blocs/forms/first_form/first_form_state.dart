@@ -6,7 +6,6 @@ class FirstFormState extends Equatable {
     this.brand = const BrandField.pure(),
     this.model = const ModelField.pure(),
     this.registration = const RegistrationField.pure(),
-    // this.mileage = const MileageField.pure(),
     this.price = const PriceField.pure(),
   });
 
@@ -14,7 +13,6 @@ class FirstFormState extends Equatable {
   final BrandField brand;
   final ModelField model;
   final RegistrationField registration;
-  // final MileageField mileage;
   final PriceField price;
 
   FirstFormState copyWith({
@@ -22,7 +20,6 @@ class FirstFormState extends Equatable {
     BrandField brand,
     ModelField model,
     RegistrationField registration,
-    // MileageField mileage,
     PriceField price,
   }) {
     return FirstFormState(
@@ -30,7 +27,6 @@ class FirstFormState extends Equatable {
       brand: brand ?? this.brand,
       model: model ?? this.model,
       registration: registration ?? this.registration,
-      // mileage: mileage ?? this.mileage,
       price: price ?? this.price,
     );
   }
@@ -38,6 +34,5 @@ class FirstFormState extends Equatable {
   bool get valid => status == FormzStatus.valid;
 
   @override
-  // List<Object> get props => [status, brand, model, registration, mileage];
   List<Object> get props => [status, brand, model, registration, price];
 }

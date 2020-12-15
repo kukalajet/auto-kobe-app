@@ -18,11 +18,11 @@ class SearchButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: GestureDetector(
-        onTap: () => showMaterialModalBottomSheet(
+        onTap: () => showCupertinoModalBottomSheet(
           expand: false,
           context: context,
           backgroundColor: Colors.transparent,
-          builder: (context, scrollController) => picker,
+          builder: (context) => picker,
         ),
         child: Container(
           height: height,

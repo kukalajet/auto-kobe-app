@@ -9,7 +9,7 @@ class PriceField extends FormzInput<Price, PriceFieldValidationError> {
 
   @override
   PriceFieldValidationError validator(Price value) {
-    if (value.value == null && value.valute == null)
+    if (value.value == null || value.valute == null)
       return PriceFieldValidationError.invalid;
 
     return null;

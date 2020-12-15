@@ -8,13 +8,13 @@ class FuelTypeRepository {
 
   // FuelTypeRepository({@required this.httpClient});
 
-  Future<List<FuelType>> fetchTypes() async {
-    List<FuelType> types = <FuelType>[
-      FuelType(id: 0, type: 'Petrol'),
-      FuelType(id: 1, type: 'Diesel'),
-      FuelType(id: 2, type: 'Electric'),
-      FuelType(id: 3, type: 'Hybrids'),
-      FuelType(id: 4, type: 'Bi fuel'),
+  Future<List<Fuel>> fetchTypes() async {
+    List<Fuel> types = <Fuel>[
+      Fuel(id: 0, type: FuelType.Petrol),
+      Fuel(id: 1, type: FuelType.Diesel),
+      Fuel(id: 2, type: FuelType.Electric),
+      Fuel(id: 3, type: FuelType.Hybrid),
+      Fuel(id: 4, type: FuelType.BiFuel),
     ];
 
     return types;

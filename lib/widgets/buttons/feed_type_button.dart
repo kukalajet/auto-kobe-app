@@ -20,11 +20,12 @@ class FeedTypeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: GestureDetector(
+        // onTap: () => showCupertinoModalBottomSheet(
         onTap: () => showCupertinoModalBottomSheet(
           expand: false,
           context: context,
           backgroundColor: Colors.transparent,
-          builder: (context, scrollController) => picker,
+          builder: (context) => picker,
         ),
         child: Container(
           height: height,

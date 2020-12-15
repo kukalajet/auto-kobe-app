@@ -6,6 +6,7 @@ import 'package:brand_repository/brand_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
+import 'package:listing_repository/listing_repository.dart';
 import 'package:model_repository/model_repository.dart';
 import 'package:valute_repository/valute_repository.dart';
 

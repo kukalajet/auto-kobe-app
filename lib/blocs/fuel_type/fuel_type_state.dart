@@ -5,15 +5,15 @@ enum FuelTypeStatus { initial, success, failure }
 class FuelTypeState extends Equatable {
   const FuelTypeState({
     this.status = FuelTypeStatus.initial,
-    this.types = const <FuelType>[],
+    this.types = const <Fuel>[],
   });
 
   final FuelTypeStatus status;
-  final List<FuelType> types;
+  final List<Fuel> types;
 
   FuelTypeState copyWith({
     FuelTypeStatus status,
-    List<FuelType> types,
+    List<Fuel> types,
   }) {
     return FuelTypeState(
       status: status ?? this.status,

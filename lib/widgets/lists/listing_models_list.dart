@@ -3,6 +3,7 @@ import 'package:auto_kobe/widgets/widgets.dart';
 import 'package:brand_repository/brand_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:model_repository/model_repository.dart';
 
 class ListingModelsList extends StatefulWidget {
@@ -20,18 +21,20 @@ class ListingModelsList extends StatefulWidget {
 }
 
 class _ListingModelsListState extends State<ListingModelsList> {
-  final _scrollController = ScrollController();
+  ScrollController _scrollController;
   ModelBloc _modelBloc;
 
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(_onScroll);
     _modelBloc = context.bloc<ModelBloc>()..add(ModelFetched(widget.brand));
   }
 
   @override
   Widget build(BuildContext context) {
+    _scrollController = ModalScrollController.of(context);
+    _scrollController.addListener(_onScroll);
+
     return BlocConsumer<ModelBloc, ModelState>(
       listener: (context, state) {
         if (!state.hasReachedMax && _isBottom) {
@@ -47,6 +50,7 @@ class _ListingModelsListState extends State<ListingModelsList> {
               return const Center(child: Text('no models'));
             }
             return ListView.builder(
+              shrinkWrap: true,
               itemBuilder: (BuildContext context, int index) {
                 return index >= state.models.length
                     ? BottomLoader()
@@ -101,14 +105,18 @@ class _ModelItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final textTheme = Theme.of(context).textTheme;
-
-    return ListTile(
-      title: Text(model.name),
-      isThreeLine: true,
-      subtitle: Text(model.id.toString()),
-      dense: true,
+    return GestureDetector(
       onTap: () => onTap(model),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Text(
+          model.name,
+          style: TextStyle(
+            color: Colors.black87,
+            fontSize: 24.0,
+          ),
+        ),
+      ),
     );
   }
 }

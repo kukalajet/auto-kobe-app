@@ -24,9 +24,7 @@ class _ListingValutesListState extends State<ListingValutesList> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ValuteBloc, ValuteState>(
-      listener: (context, state) {
-        // TEST
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         switch (state.status) {
           case ValuteStatus.failure:

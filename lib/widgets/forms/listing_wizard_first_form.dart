@@ -1,8 +1,10 @@
 import 'package:auto_kobe/blocs/blocs.dart';
-import 'package:auto_kobe/models/models.dart';
+import 'package:auto_kobe/utils/palette.dart';
 import 'package:auto_kobe/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:listing_repository/listing_repository.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class ListingWizardFirstForm extends StatelessWidget {
   @override
@@ -43,13 +45,12 @@ class _BrandInput extends StatelessWidget {
           icon: Icons.car_repair,
           hint: 'BRAND',
           value: state.brand.value.name,
-          picker: Scaffold(
-            body: ListingBrandsList(
-              onTap: (brand) {
-                context.bloc<FirstFormBloc>().add(ListingBrandChanged(brand));
-                Navigator.pop(context);
-              },
-            ),
+          expand: true,
+          picker: ListingBrandsList(
+            onTap: (brand) {
+              context.bloc<FirstFormBloc>().add(ListingBrandChanged(brand));
+              Navigator.pop(context);
+            },
           ),
         );
       },
@@ -67,7 +68,8 @@ class _ModelInput extends StatelessWidget {
           icon: Icons.car_rental,
           hint: 'MODEL',
           value: state.model.value.name,
-          picker: Scaffold(
+          picker: CupertinoScaffold(
+            transitionBackgroundColor: kWhite,
             body: ListingModelsList(
               brand: state.brand.value,
               onTap: (model) {
@@ -108,7 +110,6 @@ class _RegistrationInput extends StatelessWidget {
   }
 }
 
-// TODO: Fix pickers data
 class _PriceInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -118,7 +119,7 @@ class _PriceInput extends StatelessWidget {
         return TextPickerInputField(
           textHint: "PRICE",
           pickerHint: state.price.value.valute != null
-              ? state.price.value.valute.symbol
+              ? state.price.value.valute.name
               : 'VALUTE',
           showOverviewHint: state.price.value.value != null,
           picker: ListingValutesList(

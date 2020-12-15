@@ -4,7 +4,7 @@ import 'package:auto_kobe/blocs/blocs.dart';
 import 'package:fuel_type_repository/fuel_type_repository.dart';
 
 class ListingFuelTypesList extends StatefulWidget {
-  final Function(FuelType) onTap;
+  final Function(Fuel) onTap;
 
   ListingFuelTypesList({Key key, @required this.onTap}) : super(key: key);
 
@@ -56,8 +56,8 @@ class _ListingFuelTypesListState extends State<ListingFuelTypesList> {
 }
 
 class _FuelItem extends StatelessWidget {
-  final FuelType fuel;
-  final Function(FuelType) onTap;
+  final Fuel fuel;
+  final Function(Fuel) onTap;
 
   const _FuelItem({
     Key key,
@@ -74,7 +74,10 @@ class _FuelItem extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(fuel.type, style: TextStyle(color: Colors.black87)),
+            Text(
+              fuel.type.toString().split('.').last,
+              style: TextStyle(color: Colors.black87),
+            ),
           ],
         ),
       ),

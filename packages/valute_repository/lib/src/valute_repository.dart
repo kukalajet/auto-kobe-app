@@ -9,10 +9,10 @@ class ValuteRepository {
 
   Future<List<Valute>> fetchValutes() async {
     List<Valute> valutes = <Valute>[
-      Valute(id: 0, name: 'Lek', symbol: 'L'),
+      Valute(id: 0, name: 'Lekë', symbol: 'L'),
       Valute(id: 1, name: 'Euro', symbol: '€'),
-      // TODO: FIX US DOLLAR SYMBOL.
-      Valute(id: 0, name: 'US Dollar', symbol: 'US'),
+      Valute(id: 2, name: 'Dollar', symbol: '\$'),
+      Valute(id: 3, name: 'Pound', symbol: '£'),
     ];
 
     return Future.delayed(

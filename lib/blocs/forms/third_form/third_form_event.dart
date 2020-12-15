@@ -19,7 +19,7 @@ class ListingCubicCapacityChanged extends ThirdFormEvent {
 class ListingFuelChanged extends ThirdFormEvent {
   const ListingFuelChanged(this.fuel);
 
-  final FuelType fuel;
+  final Fuel fuel;
 
   @override
   List<Object> get props => [fuel];

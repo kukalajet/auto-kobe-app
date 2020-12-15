@@ -17,11 +17,13 @@ dependencies:
   google_fonts: ^1.1.0
   meta: ^1.1.8
   pedantic: ^1.9.0
-  modal_bottom_sheet: ^0.2.2
+  modal_bottom_sheet: ^1.0.0+1
   intl:
   flutter_datetime_picker: ^1.4.0
   image_picker: ^0.6.7+14
   flutter_secure_storage: ^3.3.5
+  cached_network_image: ^2.4.1
+  carousel_slider: ^2.3.1
   authentication_repository:
     path: packages/authentication_repository
   listing_repository:
@@ -42,7 +44,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  # bloc_test: ^6.0.1
   mockito: ^4.0.0
   intl_translation:
 

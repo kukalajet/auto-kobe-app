@@ -1,5 +1,5 @@
-import 'package:auto_kobe/models/models.dart';
 import 'package:formz/formz.dart';
+import 'package:listing_repository/listing_repository.dart';
 
 enum RegistrationFieldValidationError { invalid }
 

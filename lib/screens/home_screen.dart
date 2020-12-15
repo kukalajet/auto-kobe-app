@@ -88,7 +88,7 @@ class HomeScreen extends StatelessWidget {
                 expand: true,
                 context: context,
                 backgroundColor: Colors.transparent,
-                builder: (context, scrollController) => ListingCreationScreen(),
+                builder: (context) => ListingCreationScreen(),
               );
             },
           ),

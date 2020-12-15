@@ -25,8 +25,10 @@ void main() async {
   final storage = new FlutterSecureStorage();
   runApp(
     App(
-      authenticationRepository:
-          AuthenticationRepository(httpClient: client, storage: storage),
+      authenticationRepository: AuthenticationRepository(
+        httpClient: client,
+        storage: storage,
+      ),
       listingRepository: ListingRepository(httpClient: client),
       brandRepository: BrandRepository(httpClient: client),
       modelRepository: ModelRepository(httpClient: client),

@@ -9,12 +9,14 @@ class PickerInputField extends StatelessWidget {
     @required this.icon,
     @required this.hint,
     @required this.value,
+    this.expand = false,
   }) : super(key: key);
 
   final IconData icon;
   final String hint;
   final String value;
   final Widget picker;
+  final bool expand;
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +26,10 @@ class PickerInputField extends StatelessWidget {
       width: size.width * 0.9,
       child: GestureDetector(
         onTap: () => showCupertinoModalBottomSheet(
-          expand: false,
+          expand: expand,
           context: context,
           backgroundColor: Colors.transparent,
-          builder: (context, scrollController) => picker,
+          builder: (context) => picker,
         ),
         child: Container(
           height: size.height * 0.08,

@@ -53,7 +53,7 @@ class TextPickerInputField extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                flex: 5,
+                flex: 8,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4.0),
                   child: TextField(
@@ -80,17 +80,15 @@ class TextPickerInputField extends StatelessWidget {
                 margin: const EdgeInsets.only(left: 8.0, right: 8.0),
               ),
               Expanded(
-                flex: 2,
+                flex: 5,
                 child: Container(
                   child: GestureDetector(
-                    onTap: () => {
-                      showCupertinoModalBottomSheet(
-                        expand: false,
-                        context: context,
-                        backgroundColor: Colors.transparent,
-                        builder: (context, scrollController) => picker,
-                      )
-                    },
+                    onTap: () => showCupertinoModalBottomSheet(
+                      expand: false,
+                      context: context,
+                      backgroundColor: Colors.transparent,
+                      builder: (context) => picker,
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 4.0),
                       child: TextField(
