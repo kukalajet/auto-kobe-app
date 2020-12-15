@@ -2,13 +2,14 @@ import 'dart:async';
 
 import 'package:auto_kobe/models/forms/forms.dart';
 import 'package:auto_kobe/models/models.dart';
-import 'package:brand_repository/brand_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:listing_repository/listing_repository.dart';
 import 'package:model_repository/model_repository.dart';
 import 'package:valute_repository/valute_repository.dart';
+import 'package:brand_repository/brand_repository.dart';
+import 'package:condition_repository/condition_repository.dart';
 
 part 'first_form_event.dart';
 part 'first_form_state.dart';
@@ -30,6 +31,8 @@ class FirstFormBloc extends Bloc<FirstFormEvent, FirstFormState> {
       yield _mapRegistrationChangedToState(event, state);
     } else if (event is ListingValuteChanged) {
       yield _mapValuteChangedToState(event, state);
+    } else if (event is ListingConditionChanged) {
+      yield _mapConditionChangedToState(event, state);
     }
   }
 
@@ -45,6 +48,7 @@ class FirstFormBloc extends Bloc<FirstFormEvent, FirstFormState> {
           state.model,
           state.registration,
           state.price,
+          state.condition,
         ]));
   }
 
@@ -60,6 +64,7 @@ class FirstFormBloc extends Bloc<FirstFormEvent, FirstFormState> {
           model,
           state.registration,
           state.price,
+          state.condition,
         ]));
   }
 
@@ -75,6 +80,7 @@ class FirstFormBloc extends Bloc<FirstFormEvent, FirstFormState> {
           state.model,
           registration,
           state.price,
+          state.condition,
         ]));
   }
 
@@ -91,6 +97,7 @@ class FirstFormBloc extends Bloc<FirstFormEvent, FirstFormState> {
           state.model,
           state.registration,
           price,
+          state.condition,
         ]));
   }
 
@@ -107,6 +114,23 @@ class FirstFormBloc extends Bloc<FirstFormEvent, FirstFormState> {
           state.model,
           state.registration,
           price,
+          state.condition,
+        ]));
+  }
+
+  FirstFormState _mapConditionChangedToState(
+    ListingConditionChanged event,
+    FirstFormState state,
+  ) {
+    final condition = ConditionField.dirty(event.condition);
+    return state.copyWith(
+        condition: condition,
+        status: Formz.validate([
+          state.brand,
+          state.model,
+          state.registration,
+          state.price,
+          condition,
         ]));
   }
 }

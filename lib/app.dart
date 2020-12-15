@@ -14,6 +14,7 @@ import 'package:model_repository/model_repository.dart';
 import 'package:door_type_repository/door_type_repository.dart';
 import 'package:fuel_type_repository/fuel_type_repository.dart';
 import 'package:valute_repository/valute_repository.dart';
+import 'package:condition_repository/condition_repository.dart';
 
 class App extends StatelessWidget {
   const App({
@@ -26,6 +27,7 @@ class App extends StatelessWidget {
     @required this.doorTypeRepository,
     @required this.fuelTypeRepository,
     @required this.valuteRepository,
+    @required this.conditionRepository,
   })  : assert(authenticationRepository != null),
         assert(listingRepository != null),
         assert(brandRepository != null),
@@ -34,6 +36,7 @@ class App extends StatelessWidget {
         assert(doorTypeRepository != null),
         assert(fuelTypeRepository != null),
         assert(valuteRepository != null),
+        assert(conditionRepository != null),
         super(key: key);
 
   final AuthenticationRepository authenticationRepository;
@@ -44,6 +47,7 @@ class App extends StatelessWidget {
   final DoorTypeRepository doorTypeRepository;
   final FuelTypeRepository fuelTypeRepository;
   final ValuteRepository valuteRepository;
+  final ConditionRepository conditionRepository;
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +78,9 @@ class App extends StatelessWidget {
         RepositoryProvider<ValuteRepository>(
           create: (_) => valuteRepository,
         ),
+        RepositoryProvider<ConditionRepository>(
+          create: (_) => conditionRepository,
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -103,6 +110,10 @@ class App extends StatelessWidget {
           BlocProvider<ValuteBloc>(
             create: (_) => ValuteBloc(valuteRepository: valuteRepository),
           ),
+          BlocProvider<ConditionBloc>(
+            create: (_) =>
+                ConditionBloc(conditionRepository: conditionRepository),
+          ),
         ],
         child: AppView(),
       ),
@@ -130,13 +141,13 @@ class _AppViewState extends State<AppView> {
         return BlocListener<AuthenticationBloc, AuthenticationState>(
           listener: (context, state) {
             switch (state.status) {
-              case AuthenticationStatus.unauthenticated:
+              case AuthenticationStatus.authenticated:
                 _navigator.pushAndRemoveUntil<void>(
                   HomeScreen.route(),
                   (route) => false,
                 );
                 break;
-              case AuthenticationStatus.authenticated:
+              case AuthenticationStatus.unauthenticated:
                 _navigator.pushAndRemoveUntil<void>(
                   LoginPage.route(),
                   (route) => false,

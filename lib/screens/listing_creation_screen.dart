@@ -9,6 +9,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:model_repository/model_repository.dart';
 import 'package:brand_repository/brand_repository.dart';
 import 'package:country_repository/country_repository.dart';
+import 'package:condition_repository/condition_repository.dart';
 
 class ListingCreationScreen extends StatelessWidget {
   @override
@@ -55,6 +56,12 @@ class ListingCreationScreen extends StatelessWidget {
           create: (context) => FuelTypeBloc(
             fuelTypeRepository:
                 RepositoryProvider.of<FuelTypeRepository>(context),
+          ),
+        ),
+        BlocProvider<ConditionBloc>(
+          create: (context) => ConditionBloc(
+            conditionRepository:
+                RepositoryProvider.of<ConditionRepository>(context),
           ),
         ),
       ],

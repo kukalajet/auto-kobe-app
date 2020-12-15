@@ -83,24 +83,6 @@ class _DoorTypeInput extends StatelessWidget {
   }
 }
 
-// class _SeatsInput extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocBuilder<SecondFormBloc, SecondFormState>(
-//       buildWhen: (previous, current) => previous.seats != current.seats,
-//       builder: (context, state) {
-//         return TextInputField(
-//           icon: Icons.animation,
-//           hint: 'NUMBER OF SEATS',
-//           inputType: TextInputType.number,
-//           onTextChanged: (String seats) => context
-//               .bloc<SecondFormBloc>()
-//               .add(ListingSeatsChanged(int.parse(seats))),
-//         );
-//       },
-//     );
-//   }
-// }
 class _MileageInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

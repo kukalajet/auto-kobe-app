@@ -51,3 +51,12 @@ class ListingValuteChanged extends FirstFormEvent {
   @override
   List<Object> get props => [valute];
 }
+
+class ListingConditionChanged extends FirstFormEvent {
+  const ListingConditionChanged(this.condition);
+
+  final Condition condition;
+
+  @override
+  List<Object> get props => [condition];
+}

@@ -12,3 +12,4 @@ export 'fuel_type/fuel_type.dart';
 export 'door_type/door_type.dart';
 export 'valute/valute.dart';
 export 'forms/forms.dart';
+export 'condition/condition.dart';

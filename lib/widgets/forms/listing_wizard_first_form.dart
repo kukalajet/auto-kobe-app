@@ -27,6 +27,8 @@ class ListingWizardFirstForm extends StatelessWidget {
             const Padding(padding: EdgeInsets.all(8)),
             _RegistrationInput(),
             const Padding(padding: EdgeInsets.all(8)),
+            _ConditionInput(),
+            const Padding(padding: EdgeInsets.all(8)),
             _PriceInput(),
           ],
         ),
@@ -133,6 +135,32 @@ class _PriceInput extends StatelessWidget {
           onTextChanged: (String price) => context
               .bloc<FirstFormBloc>()
               .add(ListingPriceChanged(int.parse(price))),
+        );
+      },
+    );
+  }
+}
+
+class _ConditionInput extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<FirstFormBloc, FirstFormState>(
+      buildWhen: (previous, current) => previous.condition != current.condition,
+      builder: (context, state) {
+        return PickerInputField(
+          icon: Icons.add_link,
+          hint: 'VEHICLE CONDITION',
+          value: state.condition.value.type != null
+              ? state.condition.value.type.toString().split('.').last
+              : null,
+          picker: ListingConditionsList(
+            onTap: (condition) {
+              context
+                  .bloc<FirstFormBloc>()
+                  .add(ListingConditionChanged(condition));
+              Navigator.pop(context);
+            },
+          ),
         );
       },
     );

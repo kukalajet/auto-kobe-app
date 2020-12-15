@@ -6,6 +6,7 @@ class FirstFormState extends Equatable {
     this.brand = const BrandField.pure(),
     this.model = const ModelField.pure(),
     this.registration = const RegistrationField.pure(),
+    this.condition = const ConditionField.pure(),
     this.price = const PriceField.pure(),
   });
 
@@ -13,6 +14,7 @@ class FirstFormState extends Equatable {
   final BrandField brand;
   final ModelField model;
   final RegistrationField registration;
+  final ConditionField condition;
   final PriceField price;
 
   FirstFormState copyWith({
@@ -20,6 +22,7 @@ class FirstFormState extends Equatable {
     BrandField brand,
     ModelField model,
     RegistrationField registration,
+    ConditionField condition,
     PriceField price,
   }) {
     return FirstFormState(
@@ -27,6 +30,7 @@ class FirstFormState extends Equatable {
       brand: brand ?? this.brand,
       model: model ?? this.model,
       registration: registration ?? this.registration,
+      condition: condition ?? this.condition,
       price: price ?? this.price,
     );
   }
