@@ -33,3 +33,12 @@ class ListingMotorPowerChanged extends ThirdFormEvent {
   @override
   List<Object> get props => [motorPower];
 }
+
+class ListingEmissionChanged extends ThirdFormEvent {
+  const ListingEmissionChanged(this.emission);
+
+  final Emission emission;
+
+  @override
+  List<Object> get props => [emission];
+}

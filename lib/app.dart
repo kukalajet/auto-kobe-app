@@ -16,6 +16,7 @@ import 'package:fuel_type_repository/fuel_type_repository.dart';
 import 'package:valute_repository/valute_repository.dart';
 import 'package:condition_repository/condition_repository.dart';
 import 'package:transmission_repository/transmission_repository.dart';
+import 'package:emission_repository/emission_repository.dart';
 
 class App extends StatelessWidget {
   const App({
@@ -30,6 +31,7 @@ class App extends StatelessWidget {
     @required this.valuteRepository,
     @required this.conditionRepository,
     @required this.transmissionRepository,
+    @required this.emissionRepository,
   })  : assert(authenticationRepository != null),
         assert(listingRepository != null),
         assert(brandRepository != null),
@@ -40,6 +42,7 @@ class App extends StatelessWidget {
         assert(valuteRepository != null),
         assert(conditionRepository != null),
         assert(transmissionRepository != null),
+        assert(emissionRepository != null),
         super(key: key);
 
   final AuthenticationRepository authenticationRepository;
@@ -52,6 +55,7 @@ class App extends StatelessWidget {
   final ValuteRepository valuteRepository;
   final ConditionRepository conditionRepository;
   final TransmissionRepository transmissionRepository;
+  final EmissionRepository emissionRepository;
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +91,9 @@ class App extends StatelessWidget {
         ),
         RepositoryProvider<TransmissionRepository>(
           create: (_) => transmissionRepository,
+        ),
+        RepositoryProvider<EmissionRepository>(
+          create: (_) => emissionRepository,
         ),
       ],
       child: MultiBlocProvider(
@@ -124,6 +131,9 @@ class App extends StatelessWidget {
           BlocProvider<TransmissionBloc>(
             create: (_) => TransmissionBloc(
                 transmissionRepository: transmissionRepository),
+          ),
+          BlocProvider<EmissionBloc>(
+            create: (_) => EmissionBloc(emissionRepository: emissionRepository),
           ),
         ],
         child: AppView(),

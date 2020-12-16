@@ -44,6 +44,8 @@ dependencies:
     path: packages/condition_repository
   transmission_repository:
     path: packages/transmission_repository
+  emission_repository:
+    path: packages/emission_repository
 
 dev_dependencies:
   flutter_test:

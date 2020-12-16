@@ -23,6 +23,8 @@ class ListingWizardThirdForm extends StatelessWidget {
             const Padding(padding: EdgeInsets.all(8)),
             _FuelInput(),
             const Padding(padding: EdgeInsets.all(8)),
+            _EmissionInput(),
+            const Padding(padding: EdgeInsets.all(8)),
             _MotorPowerInput(),
           ],
         ),
@@ -93,6 +95,32 @@ class _MotorPowerInput extends StatelessWidget {
           onTextChanged: (String motorPower) => context
               .bloc<ThirdFormBloc>()
               .add(ListingMotorPowerChanged(int.parse(motorPower))),
+        );
+      },
+    );
+  }
+}
+
+class _EmissionInput extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ThirdFormBloc, ThirdFormState>(
+      buildWhen: (previous, current) => previous.emission != current.emission,
+      builder: (context, state) {
+        return PickerInputField(
+          icon: Icons.access_time,
+          hint: 'EMISSION CLASS',
+          value: state.emission.value.tier != null
+              ? '${state.emission.value.standard} ${state.emission.value.tier}'
+              : null,
+          picker: ListingEmissionsList(
+            onTap: (emission) {
+              context
+                  .bloc<ThirdFormBloc>()
+                  .add(ListingEmissionChanged(emission));
+              Navigator.pop(context);
+            },
+          ),
         );
       },
     );

@@ -17,6 +17,7 @@ import 'package:fuel_type_repository/fuel_type_repository.dart';
 import 'package:transmission_repository/transmission_repository.dart';
 import 'package:valute_repository/valute_repository.dart';
 import 'package:condition_repository/condition_repository.dart';
+import 'package:emission_repository/emission_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,6 +41,7 @@ void main() async {
       valuteRepository: ValuteRepository(httpClient: client),
       conditionRepository: ConditionRepository(),
       transmissionRepository: TransmissionRepository(),
+      emissionRepository: EmissionRepository(),
     ),
   );
 }

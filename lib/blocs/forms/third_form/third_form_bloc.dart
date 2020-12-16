@@ -5,6 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:fuel_type_repository/fuel_type_repository.dart';
+import 'package:emission_repository/emission_repository.dart';
 
 part 'third_form_event.dart';
 part 'third_form_state.dart';
@@ -22,6 +23,8 @@ class ThirdFormBloc extends Bloc<ThirdFormEvent, ThirdFormState> {
       yield _mapFuelChangedToState(event, state);
     } else if (event is ListingMotorPowerChanged) {
       yield _mapMotorPowerChangedToState(event, state);
+    } else if (event is ListingEmissionChanged) {
+      yield _mapEmissionChangedToState(event, state);
     }
   }
 
@@ -36,6 +39,7 @@ class ThirdFormBloc extends Bloc<ThirdFormEvent, ThirdFormState> {
         cubicCapacity,
         state.fuel,
         state.motorPower,
+        state.emission,
       ]),
     );
   }
@@ -51,6 +55,7 @@ class ThirdFormBloc extends Bloc<ThirdFormEvent, ThirdFormState> {
         state.cubicCapacity,
         fuel,
         state.motorPower,
+        state.emission,
       ]),
     );
   }
@@ -66,6 +71,23 @@ class ThirdFormBloc extends Bloc<ThirdFormEvent, ThirdFormState> {
         state.cubicCapacity,
         state.fuel,
         motorPower,
+        state.emission,
+      ]),
+    );
+  }
+
+  ThirdFormState _mapEmissionChangedToState(
+    ListingEmissionChanged event,
+    ThirdFormState state,
+  ) {
+    final emission = EmissionField.dirty(event.emission);
+    return state.copyWith(
+      emission: emission,
+      status: Formz.validate([
+        state.cubicCapacity,
+        state.fuel,
+        state.motorPower,
+        emission,
       ]),
     );
   }
