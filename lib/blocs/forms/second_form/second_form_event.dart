@@ -42,3 +42,12 @@ class ListingMileageChanged extends SecondFormEvent {
   @override
   List<Object> get props => [mileage];
 }
+
+class ListingTransmissionChanged extends SecondFormEvent {
+  const ListingTransmissionChanged(this.transmission);
+
+  final Transmission transmission;
+
+  @override
+  List<Object> get props => [transmission];
+}

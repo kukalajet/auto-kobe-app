@@ -23,6 +23,8 @@ class ListingWizardSecondForm extends StatelessWidget {
             const Padding(padding: EdgeInsets.all(8)),
             _MileageInput(),
             const Padding(padding: EdgeInsets.all(8)),
+            _TransmissionInput(),
+            const Padding(padding: EdgeInsets.all(8)),
             _OriginCountryInput(),
             const Padding(padding: EdgeInsets.all(8)),
             _DoorTypeInput(),
@@ -98,6 +100,33 @@ class _MileageInput extends StatelessWidget {
           onTextChanged: (String seats) => context
               .bloc<SecondFormBloc>()
               .add(ListingMileageChanged(int.parse(seats))),
+        );
+      },
+    );
+  }
+}
+
+class _TransmissionInput extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SecondFormBloc, SecondFormState>(
+      buildWhen: (previous, current) =>
+          previous.transmission != current.transmission,
+      builder: (context, state) {
+        return PickerInputField(
+          icon: Icons.add_link,
+          hint: 'TRANSMISSION',
+          value: state.transmission.value.type != null
+              ? state.transmission.value.type.toString().split('.').last
+              : null,
+          picker: ListingTrasmissionsList(
+            onTap: (transmission) {
+              context
+                  .bloc<SecondFormBloc>()
+                  .add(ListingTransmissionChanged(transmission));
+              Navigator.pop(context);
+            },
+          ),
         );
       },
     );

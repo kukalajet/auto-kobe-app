@@ -14,6 +14,7 @@ import 'package:brand_repository/brand_repository.dart';
 import 'package:model_repository/model_repository.dart';
 import 'package:door_type_repository/door_type_repository.dart';
 import 'package:fuel_type_repository/fuel_type_repository.dart';
+import 'package:transmission_repository/transmission_repository.dart';
 import 'package:valute_repository/valute_repository.dart';
 import 'package:condition_repository/condition_repository.dart';
 
@@ -38,6 +39,7 @@ void main() async {
       fuelTypeRepository: FuelTypeRepository(),
       valuteRepository: ValuteRepository(httpClient: client),
       conditionRepository: ConditionRepository(),
+      transmissionRepository: TransmissionRepository(),
     ),
   );
 }

@@ -42,6 +42,8 @@ dependencies:
     path: packages/valute_repository
   condition_repository:
     path: packages/condition_repository
+  transmission_repository:
+    path: packages/transmission_repository
 
 dev_dependencies:
   flutter_test:
