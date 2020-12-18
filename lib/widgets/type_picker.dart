@@ -25,9 +25,10 @@ class _TypePickerState extends State<TypePicker> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         _TypePickerItem(
-          icon: Icon(Icons.access_alarm, size: 24),
+          icon: Icon(Icons.access_alarm, size: 26),
           tapped: indexTypeSelected == 0,
           onTypeSelected: () {
             setState(() => indexTypeSelected = 0);
@@ -35,7 +36,7 @@ class _TypePickerState extends State<TypePicker> {
           },
         ),
         _TypePickerItem(
-          icon: Icon(Icons.ac_unit, size: 24),
+          icon: Icon(Icons.ac_unit, size: 26),
           tapped: indexTypeSelected == 1,
           onTypeSelected: () {
             setState(() => indexTypeSelected = 1);
@@ -43,7 +44,7 @@ class _TypePickerState extends State<TypePicker> {
           },
         ),
         _TypePickerItem(
-          icon: Icon(Icons.ac_unit, size: 24),
+          icon: Icon(Icons.ac_unit, size: 26),
           tapped: indexTypeSelected == 2,
           onTypeSelected: () {
             setState(() => indexTypeSelected = 2);
@@ -51,7 +52,7 @@ class _TypePickerState extends State<TypePicker> {
           },
         ),
         _TypePickerItem(
-          icon: Icon(Icons.ac_unit, size: 24),
+          icon: Icon(Icons.ac_unit, size: 26),
           tapped: indexTypeSelected == 3,
           onTypeSelected: () {
             setState(() => indexTypeSelected = 3);

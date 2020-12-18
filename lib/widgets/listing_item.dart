@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:listing_repository/listing_repository.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:auto_kobe/widgets/widgets.dart';
@@ -54,19 +55,23 @@ class ListingItem extends StatelessWidget {
                           children: [
                             Text(
                               listing.model.name,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 22.0,
-                                color: Colors.indigo[600].withOpacity(0.95),
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 22.0,
+                                  color: Colors.indigo[600].withOpacity(0.95),
+                                ),
                               ),
                             ),
                             Text(
                               listing.brand.name,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 18.0,
-                                color: Colors.indigo[400].withOpacity(0.95),
-                                fontStyle: FontStyle.italic,
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 18.0,
+                                  color: Colors.indigo[400].withOpacity(0.95),
+                                  fontStyle: FontStyle.italic,
+                                ),
                               ),
                             ),
                           ],
@@ -80,19 +85,13 @@ class ListingItem extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(
-                                listing.registrationDate.year.toString(),
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 12.0,
-                                  color: Colors.grey[700].withOpacity(0.8),
-                                ),
-                              ),
-                              Text(
-                                '${listing.mileage} KM',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 12.0,
-                                  color: Colors.grey[800].withOpacity(0.8),
+                                '${listing.mileage} KM | ${listing.registrationDate.year.toString()}',
+                                style: GoogleFonts.lato(
+                                  textStyle: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16.0,
+                                    color: Colors.grey[700].withOpacity(0.8),
+                                  ),
                                 ),
                               ),
                             ],
@@ -105,25 +104,25 @@ class ListingItem extends StatelessWidget {
                           '${listing.price.value} ${listing.price.valute.symbol}',
                           style: TextStyle(
                             fontWeight: FontWeight.w900,
-                            fontSize: 28.0,
+                            fontSize: 32.0,
                             color: Colors.indigo[800].withOpacity(0.9),
                           ),
                         ),
                       ),
-                      Align(
-                        alignment: Alignment.bottomLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 6.0),
-                          child: Text(
-                            '${listing.fuelType.type.toString().split('.').last}',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 12.0,
-                              color: Colors.grey[600].withOpacity(0.8),
-                            ),
-                          ),
-                        ),
-                      ),
+                      // Align(
+                      //   alignment: Alignment.bottomLeft,
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.only(left: 6.0),
+                      //     child: Text(
+                      //       '${listing.fuelType.type.toString().split('.').last}',
+                      //       style: TextStyle(
+                      //         fontWeight: FontWeight.w600,
+                      //         fontSize: 12.0,
+                      //         color: Colors.grey[600].withOpacity(0.8),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

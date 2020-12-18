@@ -20,14 +20,17 @@ class DatePickerInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    final bool hasBottomPadding = MediaQuery.of(context).viewPadding.bottom > 0;
+    final Size size = MediaQuery.of(context).size;
+    final double height = hasBottomPadding ? size.height * 0.8 : size.height;
+    final double width = size.width;
     return Container(
-      height: size.height * 0.1,
-      width: size.width * 0.9,
+      height: height * 0.1,
+      width: width * 0.9,
       child: Stack(
         children: <Widget>[
           Positioned(
-            left: size.width * 0.155,
+            left: width * 0.155,
             top: 5,
             child: AnimatedSwitcher(
               duration: Duration(milliseconds: 500),
@@ -51,8 +54,8 @@ class DatePickerInputField extends StatelessWidget {
               locale: LocaleType.sq,
             ),
             child: Container(
-              height: size.height * 0.1,
-              width: size.width * 0.9,
+              height: height * 0.1,
+              width: width * 0.9,
               decoration: BoxDecoration(
                 color: const Color(0xffaabbcc).withOpacity(0.1),
                 borderRadius: BorderRadius.circular(16.0),

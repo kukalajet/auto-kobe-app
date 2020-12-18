@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_kobe/blocs/blocs.dart';
 import 'package:auto_kobe/widgets/widgets.dart';
 import 'package:auto_kobe/models/models.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -26,6 +27,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool hasBottomPadding = MediaQuery.of(context).viewPadding.bottom > 0;
     return BlocBuilder<TabBloc, AppTab>(
       builder: (context, activeTab) {
         return Scaffold(
@@ -53,27 +55,43 @@ class HomeScreen extends StatelessWidget {
               elevation: 0.0,
               centerTitle: true,
               title: Text(
-                'Auto24',
-                style: TextStyle(color: Colors.indigoAccent),
+                'Auto 24',
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(
+                    color: Colors.indigoAccent,
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
-              leading: IconButton(
-                icon: Icon(Icons.ac_unit),
-                color: Colors.indigoAccent,
-                onPressed: () {},
+              leading: Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.menu_rounded,
+                    size: 28.0,
+                  ),
+                  color: Colors.indigoAccent,
+                  onPressed: () {},
+                ),
               ),
               actions: [
-                IconButton(
-                  icon: Icon(
-                    Icons.supervised_user_circle,
-                    color: Colors.indigoAccent,
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.face,
+                      color: Colors.indigoAccent,
+                      size: 28.0,
+                    ),
+                    onPressed: () {},
                   ),
-                  onPressed: () {},
                 ),
               ],
             ),
           ),
           bottomNavigationBar: SizedBox(
-            height: 50,
+            height: hasBottomPadding ? 80 : 50,
             child: TabSelector(
               activeTab: activeTab,
               onTabSelected: (tab) =>

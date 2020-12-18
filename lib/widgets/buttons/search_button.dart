@@ -1,5 +1,6 @@
 import 'package:auto_kobe/utils/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class SearchButton extends StatelessWidget {
@@ -18,10 +19,8 @@ class SearchButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: GestureDetector(
-        onTap: () => showCupertinoModalBottomSheet(
-          expand: false,
+        onTap: () => showMaterialModalBottomSheet(
           context: context,
-          backgroundColor: Colors.transparent,
           builder: (context) => picker,
         ),
         child: Container(
@@ -29,7 +28,6 @@ class SearchButton extends StatelessWidget {
           width: width,
           decoration: BoxDecoration(
             color: Colors.indigo,
-            // borderRadius: BorderRadius.circular(16.0),
             borderRadius: BorderRadius.circular(24.0),
             border: Border.fromBorderSide(
               BorderSide(
@@ -39,20 +37,24 @@ class SearchButton extends StatelessWidget {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: TextField(
-              enabled: false,
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                suffixIcon: Icon(
-                  Icons.search,
-                  size: 28.0,
-                  color: Colors.white70,
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Spacer(),
+                Text(
+                  'SEARCH',
+                  style: GoogleFonts.lato(
+                    textStyle: TextStyle(
+                      fontSize: 24,
+                      color: Colors.white70,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                 ),
-                hintText: 'SEARCH',
-                hintStyle: kBodyTextWhite,
-              ),
+                Spacer(),
+                Icon(Icons.search, size: 28, color: Colors.white70),
+              ],
             ),
           ),
         ),

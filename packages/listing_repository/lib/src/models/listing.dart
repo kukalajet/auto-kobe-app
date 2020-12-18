@@ -1,11 +1,14 @@
+import 'package:equatable/equatable.dart';
+import 'package:meta/meta.dart';
+import 'package:fuel_type_repository/fuel_type_repository.dart';
+import 'package:model_repository/model_repository.dart';
+import 'package:transmission_repository/transmission_repository.dart';
+import 'package:valute_repository/valute_repository.dart';
+import 'package:emission_repository/emission_repository.dart';
 import 'package:brand_repository/brand_repository.dart';
+import 'package:condition_repository/condition_repository.dart';
 import 'package:country_repository/country_repository.dart';
 import 'package:door_type_repository/door_type_repository.dart';
-import 'package:equatable/equatable.dart';
-import 'package:fuel_type_repository/fuel_type_repository.dart';
-import 'package:meta/meta.dart';
-import 'package:model_repository/model_repository.dart';
-import 'package:valute_repository/valute_repository.dart';
 
 import 'date.dart';
 import 'listing_status.dart';
@@ -25,6 +28,9 @@ class Listing extends Equatable {
     @required this.motorPower,
     @required this.description,
     @required this.status,
+    @required this.condition,
+    @required this.emission,
+    @required this.transmission,
     @required this.images,
   });
 
@@ -41,6 +47,9 @@ class Listing extends Equatable {
   final int motorPower;
   final String description;
   final ListingStatus status;
+  final Condition condition;
+  final Emission emission;
+  final Transmission transmission;
   final List<String> images;
 
   @override
@@ -58,6 +67,9 @@ class Listing extends Equatable {
         motorPower,
         description,
         status,
+        condition,
+        emission,
+        transmission,
         images,
       ];
 }

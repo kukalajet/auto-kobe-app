@@ -53,7 +53,7 @@ class _ListingsListState extends State<ListingsList>
                     Padding(
                       padding: const EdgeInsets.fromLTRB(8, 4, 12, 4),
                       child: SearchButton(
-                        picker: Text('HELLO'),
+                        picker: SafeArea(child: Scaffold(body: Text('HELLO'))),
                         width: 200.0,
                       ),
                     ),

@@ -18,6 +18,8 @@ class TabSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
       key: ArchSampleKeys.tabs,
       type: BottomNavigationBarType.fixed,
       currentIndex: AppTab.values.indexOf(activeTab),
@@ -36,10 +38,10 @@ class TabSelector extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: Icon(
-            Icons.face,
+            Icons.message_rounded,
             key: ArchSampleKeys.profileTab,
           ),
-          label: "Profile",
+          label: "Messages",
         ),
       ],
     );
