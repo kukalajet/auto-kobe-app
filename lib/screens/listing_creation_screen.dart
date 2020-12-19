@@ -79,7 +79,7 @@ class ListingCreationScreen extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: _TypeInput(),
+                      child: TypeInput(),
                     ), // NOTE: THIS CHOOSES WHAT KIND OF FORMS WE HAVE.
                     ListingWizardFirstForm(),
                     AnimatedSwitcher(
@@ -110,21 +110,6 @@ class ListingCreationScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class _TypeInput extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ListingWizardBloc, ListingWizardState>(
-      buildWhen: (previous, current) => previous.type != current.type,
-      builder: (context, state) {
-        return TypePicker(
-            onTypeSelected: (type) => context
-                .bloc<ListingWizardBloc>()
-                .add(ListingTypeChanged(type)));
-      },
     );
   }
 }

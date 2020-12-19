@@ -1,4 +1,5 @@
 import 'package:auto_kobe/blocs/blocs.dart';
+import 'package:auto_kobe/screens/listing_search_screen.dart';
 import 'package:auto_kobe/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,7 +54,7 @@ class _ListingsListState extends State<ListingsList>
                     Padding(
                       padding: const EdgeInsets.fromLTRB(8, 4, 12, 4),
                       child: SearchButton(
-                        picker: SafeArea(child: Scaffold(body: Text('HELLO'))),
+                        picker: ListingSearchScreen(),
                         width: 200.0,
                       ),
                     ),
