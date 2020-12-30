@@ -1,4 +1,5 @@
 import 'package:auto_kobe/blocs/blocs.dart';
+import 'package:auto_kobe/utils/utils.dart';
 import 'package:auto_kobe/widgets/widgets.dart';
 import 'package:brand_repository/brand_repository.dart';
 import 'package:flutter/material.dart';
@@ -35,41 +36,44 @@ class _ListingModelsListState extends State<ListingModelsList> {
     _scrollController = ModalScrollController.of(context);
     _scrollController.addListener(_onScroll);
 
-    return BlocConsumer<ModelBloc, ModelState>(
-      listener: (context, state) {
-        if (!state.hasReachedMax && _isBottom) {
-          _modelBloc..add(ModelFetched(widget.brand));
-        }
-      },
-      builder: (context, state) {
-        switch (state.status) {
-          case ModelStatus.failure:
-            return const Center(child: Text('failed to fetch listings'));
-          case ModelStatus.success:
-            if (state.models.isEmpty) {
-              return const Center(child: Text('no models'));
-            }
-            return ListView.builder(
-              shrinkWrap: true,
-              itemBuilder: (BuildContext context, int index) {
-                return index >= state.models.length
-                    ? BottomLoader()
-                    : _ModelItem(
-                        model: state.models[index],
-                        onTap: widget.onTap,
-                      );
-              },
-              itemCount: state.hasReachedMax
-                  ? state.models.length
-                  : state.models.length + 1,
-              controller: _scrollController,
-            );
-          case ModelStatus.missingBrand:
-            return const Center(child: Text("missing brand"));
-          default:
-            return const Center(child: CircularProgressIndicator());
-        }
-      },
+    return CupertinoScaffold(
+      transitionBackgroundColor: kWhite,
+      body: BlocConsumer<ModelBloc, ModelState>(
+        listener: (context, state) {
+          if (!state.hasReachedMax && _isBottom) {
+            _modelBloc..add(ModelFetched(widget.brand));
+          }
+        },
+        builder: (context, state) {
+          switch (state.status) {
+            case ModelStatus.failure:
+              return const Center(child: Text('failed to fetch listings'));
+            case ModelStatus.success:
+              if (state.models.isEmpty) {
+                return const Center(child: Text('no models'));
+              }
+              return ListView.builder(
+                shrinkWrap: true,
+                itemBuilder: (BuildContext context, int index) {
+                  return index >= state.models.length
+                      ? BottomLoader()
+                      : _ModelItem(
+                          model: state.models[index],
+                          onTap: widget.onTap,
+                        );
+                },
+                itemCount: state.hasReachedMax
+                    ? state.models.length
+                    : state.models.length + 1,
+                controller: _scrollController,
+              );
+            case ModelStatus.missingBrand:
+              return const Center(child: Text("missing brand"));
+            default:
+              return const Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
     );
   }
 

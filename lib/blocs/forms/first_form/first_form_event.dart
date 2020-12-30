@@ -37,7 +37,7 @@ class ListingRegistrationChanged extends FirstFormEvent {
 class ListingPriceChanged extends FirstFormEvent {
   const ListingPriceChanged(this.price);
 
-  final int price;
+  final double price;
 
   @override
   List<Object> get props => [price];

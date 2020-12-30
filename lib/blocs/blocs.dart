@@ -16,3 +16,4 @@ export 'condition/condition.dart';
 export 'door_type/door_type.dart';
 export 'transmission/transmission.dart';
 export 'emission/emission.dart';
+export 'search/search.dart';

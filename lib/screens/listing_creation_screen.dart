@@ -80,7 +80,7 @@ class ListingCreationScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: TypeInput(),
-                    ), // NOTE: THIS CHOOSES WHAT KIND OF FORMS WE HAVE.
+                    ),
                     ListingWizardFirstForm(),
                     AnimatedSwitcher(
                       duration: Duration(milliseconds: 500),

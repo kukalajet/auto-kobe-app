@@ -7,7 +7,7 @@ class Price {
     @required this.valute,
   });
 
-  final int value;
+  final double value;
   final Valute valute;
 
   @override

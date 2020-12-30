@@ -23,12 +23,13 @@ class TextInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool hasBottomPadding = MediaQuery.of(context).viewPadding.bottom > 0;
-    final Size size = MediaQuery.of(context).size;
-    final double height = hasBottomPadding ? size.height * 0.8 : size.height;
-    final double width = size.width;
+    // final bool hasBottomPadding = MediaQuery.of(context).viewPadding.bottom > 0;
+    // final Size size = MediaQuery.of(context).size;
+    // final double height = hasBottomPadding ? size.height * 0.8 : size.height;
+    final double width = MediaQuery.of(context).size.width;
     return Container(
-      height: height * 0.1,
+      // height: height * 0.1,
+      height: 72.0,
       width: width * 0.9,
       decoration: BoxDecoration(
         color: const Color(0xffaabbcc).withOpacity(0.1),

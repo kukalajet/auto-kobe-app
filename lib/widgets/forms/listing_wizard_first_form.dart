@@ -1,10 +1,8 @@
 import 'package:auto_kobe/blocs/blocs.dart';
-import 'package:auto_kobe/utils/palette.dart';
 import 'package:auto_kobe/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:listing_repository/listing_repository.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class ListingWizardFirstForm extends StatelessWidget {
   @override
@@ -70,15 +68,12 @@ class _ModelInput extends StatelessWidget {
           icon: Icons.car_rental,
           hint: 'MODEL',
           value: state.model.value.name,
-          picker: CupertinoScaffold(
-            transitionBackgroundColor: kWhite,
-            body: ListingModelsList(
-              brand: state.brand.value,
-              onTap: (model) {
-                context.bloc<FirstFormBloc>().add(ListingModelChanged(model));
-                Navigator.pop(context);
-              },
-            ),
+          picker: ListingModelsList(
+            brand: state.brand.value,
+            onTap: (model) {
+              context.bloc<FirstFormBloc>().add(ListingModelChanged(model));
+              Navigator.pop(context);
+            },
           ),
         );
       },
@@ -95,8 +90,8 @@ class _RegistrationInput extends StatelessWidget {
       builder: (context, state) {
         return DatePickerInputField(
           icon: Icons.car_rental,
-          hint: 'REGISTRATION DATE',
-          value: state.registration.value.toString(),
+          hint: 'REGISTRATION YEAR',
+          value: state.registration.value.year.toString(),
           showOverviewHint: state.registration.value.day != null,
           onConfirmed: (selected) {
             Date date = Date(
@@ -134,7 +129,7 @@ class _PriceInput extends StatelessWidget {
           inputType: TextInputType.number,
           onTextChanged: (String price) => context
               .bloc<FirstFormBloc>()
-              .add(ListingPriceChanged(int.parse(price))),
+              .add(ListingPriceChanged(double.parse(price))),
         );
       },
     );

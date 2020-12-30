@@ -1,4 +1,6 @@
 export 'avatar.dart';
+export 'year_picker.dart';
+export 'slider/slider.dart';
 export 'tab_selector.dart';
 export 'bottom_loader.dart';
 export 'listings_list.dart';

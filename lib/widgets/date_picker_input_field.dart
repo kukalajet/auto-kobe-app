@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:auto_kobe/utils/palette.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
+import 'package:auto_kobe/widgets/widgets.dart' as widget;
 
 class DatePickerInputField extends StatelessWidget {
   const DatePickerInputField({
@@ -20,12 +22,9 @@ class DatePickerInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool hasBottomPadding = MediaQuery.of(context).viewPadding.bottom > 0;
-    final Size size = MediaQuery.of(context).size;
-    final double height = hasBottomPadding ? size.height * 0.8 : size.height;
-    final double width = size.width;
+    final double width = MediaQuery.of(context).size.width;
     return Container(
-      height: height * 0.1,
+      height: 72.0,
       width: width * 0.9,
       child: Stack(
         children: <Widget>[
@@ -43,18 +42,13 @@ class DatePickerInputField extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () => DatePicker.showDatePicker(
-              context,
-              showTitleActions: true,
-              minTime: DateTime(2018, 3, 5),
-              maxTime: DateTime(2019, 6, 7),
-              onChanged: (date) => print('change $date'),
-              onConfirm: (date) => onConfirmed(date),
-              currentTime: DateTime.now(),
-              locale: LocaleType.sq,
+            onTap: () => showCupertinoModalBottomSheet(
+              context: context,
+              builder: (context) => widget.YearPicker(
+                onConfirm: (date) => onConfirmed(date),
+              ),
             ),
             child: Container(
-              height: height * 0.1,
               width: width * 0.9,
               decoration: BoxDecoration(
                 color: const Color(0xffaabbcc).withOpacity(0.1),
