@@ -6,6 +6,7 @@ import 'package:formz/formz.dart';
 import 'package:auto_kobe/models/search/search.dart';
 import 'package:fuel_type_repository/fuel_type_repository.dart';
 import 'package:listing_repository/listing_repository.dart';
+import 'package:meta/meta.dart';
 import 'package:model_repository/model_repository.dart';
 import 'package:transmission_repository/transmission_repository.dart';
 import 'package:valute_repository/valute_repository.dart';
@@ -14,7 +15,13 @@ part 'search_event.dart';
 part 'search_state.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
-  SearchBloc() : super(const SearchState());
+  SearchBloc({
+    @required ListingRepository listingRepository,
+  })  : assert(listingRepository != null),
+        _listingRepository = listingRepository,
+        super(const SearchState());
+
+  final ListingRepository _listingRepository;
 
   @override
   Stream<SearchState> mapEventToState(SearchEvent event) async* {
@@ -34,6 +41,8 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       yield _mapRegistrationChangedToState(event, state);
     } else if (event is SearchTransmissionChanged) {
       yield _mapTransmissionChangedToState(event, state);
+    } else if (event is SearchedListingFetched) {
+      yield await _mapSearchedListingFetchedToState(state);
     }
   }
 
@@ -198,5 +207,43 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         transmission,
       ]),
     );
+  }
+
+  Future<SearchState> _mapSearchedListingFetchedToState(
+    SearchState state,
+  ) async {
+    if (state.hasReachedMax) return state;
+    try {
+      if (state.searchingStatus == SearchStatus.initial) {
+        final listings = await _listingRepository.fetchListings(0, 20);
+        return state.copyWith(
+          searchingStatus: SearchStatus.success,
+          listings: listings,
+          hasReachedMax: false,
+          status: Formz.validate([
+            state.type,
+            state.brand,
+            state.fuel,
+            state.mileage,
+            state.model,
+            state.price,
+            state.registration,
+            state.transmission,
+          ]),
+        );
+      }
+
+      final listings =
+          await _listingRepository.fetchListings(state.listings.length, 20);
+      return listings.isEmpty
+          ? state.copyWith(hasReachedMax: true)
+          : state.copyWith(
+              searchingStatus: SearchStatus.success,
+              listings: List.of(state.listings)..addAll(listings),
+              hasReachedMax: false,
+            );
+    } on Exception {
+      return state.copyWith(searchingStatus: SearchStatus.failure);
+    }
   }
 }

@@ -90,3 +90,5 @@ class SearchTransmissionChanged extends SearchEvent {
   @override
   List<Object> get props => [transmission];
 }
+
+class SearchedListingFetched extends SearchEvent {}

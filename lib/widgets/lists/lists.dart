@@ -7,3 +7,4 @@ export 'listing_conditions_list.dart';
 export 'listing_transmissions_list.dart';
 export 'listing_emissions_list.dart';
 export 'listing_fuel_types_list.dart';
+export 'searched_listings_list.dart';

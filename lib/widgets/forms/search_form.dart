@@ -2,16 +2,47 @@ import 'package:auto_kobe/blocs/blocs.dart';
 import 'package:auto_kobe/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:listing_repository/listing_repository.dart';
 import 'package:valute_repository/valute_repository.dart';
 
 class SearchForm extends StatelessWidget {
+  Widget _buildSubmit(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      child: SizedBox(
+        width: double.infinity,
+        height: 48.0,
+        child: FlatButton(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24.0),
+          ),
+          color: const Color(0xFF0072ff),
+          child: Text(
+            'SUBMIT',
+            style: GoogleFonts.lato(
+              textStyle: TextStyle(
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+                fontSize: 18.0,
+              ),
+            ),
+          ),
+          onPressed: () {
+            context.read<SearchBloc>()..add(SearchedListingFetched());
+            // Navigator.pop(context);
+          },
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<SearchBloc, SearchState>(
       listener: (context, state) => null,
-      child: Align(
-        alignment: const Alignment(0, -1 / 3),
+      child: SingleChildScrollView(
+        primary: true,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -33,6 +64,8 @@ class SearchForm extends StatelessWidget {
             _FuelInput(),
             const Padding(padding: EdgeInsets.all(8)),
             _TransmissionInput(),
+            const Padding(padding: EdgeInsets.all(8)),
+            _buildSubmit(context),
           ],
         ),
       ),
