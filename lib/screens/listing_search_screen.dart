@@ -21,24 +21,24 @@ class ListingSearchScreen extends StatelessWidget {
           return SafeArea(
             child: Scaffold(
               backgroundColor: Colors.white38,
-              appBar: PreferredSize(
-                preferredSize: Size.fromHeight(50.0),
-                child: AppBar(
-                  centerTitle: true,
-                  backgroundColor: Colors.transparent,
-                  title: Text(
-                    'SEARCH',
-                    style: GoogleFonts.lato(
-                      textStyle: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black54,
-                        fontSize: 24.0,
-                      ),
-                    ),
-                  ),
-                  elevation: 0.0,
-                ),
-              ),
+              // appBar: PreferredSize(
+              //   preferredSize: Size.fromHeight(50.0),
+              //   child: AppBar(
+              //     centerTitle: true,
+              //     backgroundColor: Colors.transparent,
+              //     title: Text(
+              //       'SEARCH',
+              //       style: GoogleFonts.lato(
+              //         textStyle: TextStyle(
+              //           fontWeight: FontWeight.w500,
+              //           color: Colors.black54,
+              //           fontSize: 24.0,
+              //         ),
+              //       ),
+              //     ),
+              //     elevation: 0.0,
+              //   ),
+              // ),
               body: AnimatedSwitcher(
                 duration: Duration(milliseconds: 500),
                 child:

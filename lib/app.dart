@@ -4,7 +4,6 @@ import 'package:auto_kobe/blocs/door_type/door_type.dart';
 import 'package:country_repository/country_repository.dart';
 import 'package:listing_repository/listing_repository.dart';
 import 'package:brand_repository/brand_repository.dart';
-import 'package:auto_kobe/routes.dart';
 import 'package:auto_kobe/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -155,22 +154,21 @@ class _AppViewState extends State<AppView> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // theme: ThemeData(platform: TargetPlatform.iOS),
       theme: theme,
       navigatorKey: _navigatorKey,
       builder: (context, child) {
         return BlocListener<AuthenticationBloc, AuthenticationState>(
           listener: (context, state) {
             switch (state.status) {
-              case AuthenticationStatus.unauthenticated:
+              case AuthenticationStatus.authenticated:
                 _navigator.pushAndRemoveUntil<void>(
                   HomeScreen.route(),
                   (route) => false,
                 );
                 break;
-              case AuthenticationStatus.authenticated:
+              case AuthenticationStatus.unauthenticated:
                 _navigator.pushAndRemoveUntil<void>(
-                  LoginPage.route(),
+                  OnboardingScreen.route(),
                   (route) => false,
                 );
                 break;
@@ -182,18 +180,6 @@ class _AppViewState extends State<AppView> {
         );
       },
       onGenerateRoute: (_) => SplashScreen.route(),
-      routes: {
-        ArchSampleRoutes.home: (context) {
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider<TabBloc>(
-                create: (context) => TabBloc(),
-              ),
-            ],
-            child: HomeScreen(),
-          );
-        },
-      },
     );
   }
 }

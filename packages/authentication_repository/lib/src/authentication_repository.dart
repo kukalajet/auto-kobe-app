@@ -20,6 +20,21 @@ class LogInWithGoogleFailure implements Exception {}
 /// Thrown during the logout process if a failure occurs.
 class LogOutFailure implements Exception {}
 
+/// Thrown during the login process if wrong credentials are used.
+class LogInWithWrongCredentials implements Exception {}
+
+/// Thrown during the login process if wrong credentials are used.
+class SignUpWithWrongCredentials implements Exception {}
+
+// WIP
+/// Thrown if stored token is `null`
+class TokenFailure implements Exception {}
+
+// WIP
+/// Thrown during the retrieving of current user from server
+/// if a failure occurs.
+class SelfUserFailure implements Exception {}
+
 /// {@template authentication_repository}
 /// Repository which manages user authentication.
 /// {@endtemplate}
@@ -39,10 +54,21 @@ class AuthenticationRepository {
   final http.Client httpClient;
   final FlutterSecureStorage storage;
 
+  /// Authentication service's constants
+  static const String baseUrl = 'https://auto24.herokuapp.com/';
+  static const String authUrl = '${baseUrl}auth/';
+  static const String usersUrl = '${baseUrl}users/';
+  static const String signinEndpoint = 'signin';
+  static const String signupEndpoint = 'signup';
+  static const String selfEndpoint = 'self';
+
+  /// Storage constants
+  static const String userKey = 'user';
+  static const String tokenKey = 'token';
+
   void sendUser() async {
-    final encodedUser = await storage.read(key: 'user');
-    if (encodedUser == null) return _controller.add(User.empty);
-    final user = User.fromJson(jsonDecode(encodedUser));
+    final user = await retrieveUser();
+    if (user == null) return _controller.add(User.empty);
     _controller.add(user);
   }
 
@@ -62,13 +88,31 @@ class AuthenticationRepository {
   Future<void> signUp({
     @required String email,
     @required String password,
+    @required String firstName,
+    @required String lastName,
   }) async {
-    assert(email != null && password != null);
+    assert(email != null &&
+        password != null &&
+        firstName != null &&
+        lastName != null);
+
     try {
-      // await _firebaseAuth.createUserWithEmailAndPassword(
-      //   email: email,
-      //   password: password,
-      // );
+      final response = await httpClient.post(
+        '$authUrl$signupEndpoint',
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'email': email,
+          'password': password,
+          'firstName': firstName,
+          'lastName': lastName,
+        }),
+      );
+      final statusCode = response.statusCode;
+      if (statusCode != 201) throw SignUpWithWrongCredentials();
+
+      await logInWithEmailAndPassword(email: email, password: password);
     } on Exception {
       throw SignUpFailure();
     }
@@ -97,18 +141,18 @@ class AuthenticationRepository {
         final dynamic body = jsonDecode(response.body);
         if (status == 201) {
           final dynamic accessToken = body['accessToken'];
-          final user = User(
-            name: _googleSignIn.currentUser.displayName,
-            email: _googleSignIn.currentUser.email,
-            photo: _googleSignIn.currentUser.photoUrl,
-            id: key.idToken,
-          );
+          // final user = User(
+          //   name: _googleSignIn.currentUser.displayName,
+          //   email: _googleSignIn.currentUser.email,
+          //   photo: _googleSignIn.currentUser.photoUrl,
+          //   id: key.idToken,
+          // );
 
-          _controller.add(user);
+          // _controller.add(user);
 
           final stringifiedUser = user.toString();
           await storage.write(key: 'accessToken', value: accessToken as String);
-          await storage.write(key: 'user', value: stringifiedUser);
+          await storage.write(key: userKey, value: stringifiedUser);
         } else {
           throw LogInWithGoogleFailure();
         }
@@ -127,10 +171,31 @@ class AuthenticationRepository {
   }) async {
     assert(email != null && password != null);
     try {
-      // await _firebaseAuth.signInWithEmailAndPassword(
-      //   email: email,
-      //   password: password,
-      // );
+      final response = await httpClient.post(
+        '$authUrl$signinEndpoint',
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'email': email,
+          'password': password,
+        }),
+      );
+      final body = jsonDecode(response.body) as Map<String, dynamic>;
+
+      // final statusCode = body['statusCode'] as int;
+      final statusCode = response.statusCode;
+      if (statusCode != 201) throw LogInWithWrongCredentials();
+
+      final token = body['accessToken'] as String;
+      if (token == null) throw LogInWithEmailAndPasswordFailure();
+
+      await storeToken(token);
+
+      // ignore: todo
+      // TODO: Reconsider moving the following logic out of here.
+      final user = await getSelf();
+      _controller.add(user);
     } on Exception {
       throw LogInWithEmailAndPasswordFailure();
     }
@@ -148,5 +213,59 @@ class AuthenticationRepository {
     } on Exception {
       throw LogOutFailure();
     }
+  }
+
+  // WIP
+  Future<User> getSelf() async {
+    final token = await retrieveToken();
+    if (token == null) throw TokenFailure();
+    try {
+      final response = await httpClient.get(
+        '$usersUrl$selfEndpoint',
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final user = User.fromJson(jsonDecode(response.body));
+        await storeUser(user);
+
+        return user;
+      } else {
+        throw Exception('Failed to load album');
+      }
+    } on Exception {
+      throw SelfUserFailure();
+    }
+  }
+
+  // WIP
+  Future<void> storeToken(String token) async {
+    await storage.write(key: tokenKey, value: token);
+  }
+
+  // WIP
+  Future<void> storeUser(User user) async {
+    await storage.write(key: userKey, value: user.toString());
+  }
+
+  // WIP
+  Future<String> retrieveToken() async {
+    return storage.read(key: tokenKey);
+  }
+
+  // WIP
+  Future<User> retrieveUser() async {
+    final user = await storage.read(key: userKey);
+    if (user == null) return null;
+    return User.fromJson(jsonDecode(user));
+  }
+
+  // WIP
+  Future<void> deleteStorage() async {
+    await storage.deleteAll();
   }
 }

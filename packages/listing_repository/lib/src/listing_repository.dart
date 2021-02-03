@@ -157,6 +157,10 @@ class ListingRepository {
     return startIndex < 40 ? _listings : [];
   }
 
+  Future<List<Listing>> fetchPreviews(int startIndex, int limit) async {
+    return startIndex < 6 ? _listings : [];
+  }
+
   Future<List<SearchType>> fetchSearchTypes() async {
     List<SearchType> _types = [
       SearchType(id: 0, title: 'Latest'),

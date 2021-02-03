@@ -24,6 +24,7 @@ dependencies:
   flutter_secure_storage: ^3.3.5
   cached_network_image: ^2.4.1
   carousel_slider: ^2.3.1
+  flushbar: ^1.10.4
   authentication_repository:
     path: packages/authentication_repository
   listing_repository:

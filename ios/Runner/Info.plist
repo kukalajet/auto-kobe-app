@@ -54,5 +54,12 @@
 			</array>
 		</dict>
 	</array>
+
+	<!-- Testing -->
+	<key>NSAppTransportSecurity</key>
+	<dict>
+					<key>NSAllowsArbitraryLoads</key>
+					<true/>
+	</dict>
 </dict>
 </plist>

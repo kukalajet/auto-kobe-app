@@ -8,8 +8,7 @@ class SearchedListingsList extends StatefulWidget {
   _SearchedListingsListState createState() => _SearchedListingsListState();
 }
 
-class _SearchedListingsListState extends State<SearchedListingsList>
-    with TickerProviderStateMixin {
+class _SearchedListingsListState extends State<SearchedListingsList> {
   final _scrollController = ScrollController(initialScrollOffset: 1.0);
   SearchBloc _searchBloc;
 

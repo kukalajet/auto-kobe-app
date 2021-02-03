@@ -109,20 +109,6 @@ class ListingItem extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // Align(
-                      //   alignment: Alignment.bottomLeft,
-                      //   child: Padding(
-                      //     padding: const EdgeInsets.only(left: 6.0),
-                      //     child: Text(
-                      //       '${listing.fuelType.type.toString().split('.').last}',
-                      //       style: TextStyle(
-                      //         fontWeight: FontWeight.w600,
-                      //         fontSize: 12.0,
-                      //         color: Colors.grey[600].withOpacity(0.8),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),

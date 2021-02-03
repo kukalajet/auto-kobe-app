@@ -11,6 +11,8 @@ class TextInputField extends StatelessWidget {
     this.suffixText,
     this.inputType,
     this.inputAction,
+    this.height,
+    this.obscureText,
   }) : super(key: key);
 
   final IconData icon;
@@ -20,16 +22,14 @@ class TextInputField extends StatelessWidget {
   final Function(String) onTextChanged;
   final TextInputType inputType;
   final TextInputAction inputAction;
+  final double height;
+  final bool obscureText;
 
   @override
   Widget build(BuildContext context) {
-    // final bool hasBottomPadding = MediaQuery.of(context).viewPadding.bottom > 0;
-    // final Size size = MediaQuery.of(context).size;
-    // final double height = hasBottomPadding ? size.height * 0.8 : size.height;
     final double width = MediaQuery.of(context).size.width;
     return Container(
-      // height: height * 0.1,
-      height: 72.0,
+      height: this.height ?? 72.0,
       width: width * 0.9,
       decoration: BoxDecoration(
         color: const Color(0xffaabbcc).withOpacity(0.1),
@@ -72,6 +72,7 @@ class TextInputField extends StatelessWidget {
                 ),
                 style: kBodyTextBlack,
                 keyboardType: inputType,
+                obscureText: this.obscureText ?? false,
                 onChanged: (text) => onTextChanged(text),
               ),
             ],

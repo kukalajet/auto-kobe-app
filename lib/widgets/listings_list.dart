@@ -25,6 +25,56 @@ class _ListingsListState extends State<ListingsList>
         duration: const Duration(milliseconds: 1000), vsync: this);
   }
 
+  Widget _buildHeader({
+    BuildContext context,
+    List<SearchType> types,
+    int selectedType,
+  }) {
+    IconData icon;
+    if (selectedType == 0) {
+      icon = Icons.access_time;
+    } else if (selectedType == 1) {
+      icon = Icons.local_fire_department;
+    }
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          FeedTypeButton(
+            width: 88.0,
+            height: 48.0,
+            icon: icon ?? Icons.search,
+            picker: Container(
+              decoration: BoxDecoration(color: Colors.indigo[50]),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: List.generate(
+                  types.length,
+                  (index) => _ListingTypeSearchItem(
+                    type: types[index],
+                    onTap: (type) {
+                      context
+                          .read<ListingBloc>()
+                          .add(ListingSearchTypeChanged(type));
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SearchButton(
+            picker: ListingSearchScreen(),
+            width: 200.0,
+            height: 48.0,
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ListingBloc, ListingState>(
@@ -41,85 +91,22 @@ class _ListingsListState extends State<ListingsList>
             if (state.listings.isEmpty) {
               return const Center(child: Text('no posts'));
             }
-            return CustomScrollView(
-              slivers: [
-                // Move `SliverAppBar` in a method.
-                SliverAppBar(
-                  elevation: 0.0,
-                  backgroundColor: Colors.transparent,
-                  snap: true,
-                  forceElevated: true,
-                  floating: true,
-                  actions: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 4, 12, 4),
-                      child: SearchButton(
-                        picker: ListingSearchScreen(),
-                        width: 200.0,
-                      ),
-                    ),
-                  ],
-                  title: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: BlocBuilder<ListingBloc, ListingState>(
-                          buildWhen: (previous, current) =>
-                              previous.selectedType != current.selectedType,
-                          builder: (context, state) {
-                            IconData icon;
-                            if (state.selectedType.value.id == 0) {
-                              icon = Icons.access_time;
-                            } else if (state.selectedType.value.id == 1) {
-                              icon = Icons.local_fire_department;
-                            }
-
-                            return FeedTypeButton(
-                              icon: icon ?? Icons.search,
-                              width: 88.0,
-                              height: 48.0,
-                              picker: Container(
-                                decoration:
-                                    BoxDecoration(color: Colors.indigo[50]),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: List.generate(state.types.length,
-                                      (index) {
-                                    return _ListingTypeSearchItem(
-                                      type: state.types[index],
-                                      onTap: (type) {
-                                        context.bloc<ListingBloc>().add(
-                                            ListingSearchTypeChanged(type));
-                                        Navigator.pop(context);
-                                      },
-                                    );
-                                  }),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SliverList(
-                  delegate: SliverChildListDelegate([
-                    ListView.builder(
-                      shrinkWrap: true,
-                      controller: _scrollController,
-                      itemBuilder: (BuildContext context, int index) {
-                        return index >= state.listings.length
-                            ? BottomLoader()
-                            : ListingItem(listing: state.listings[index]);
-                      },
-                      itemCount: state.hasReachedMax
-                          ? state.listings.length
-                          : state.listings.length + 1,
-                    ),
-                  ]),
-                ),
-              ],
+            return ListView.builder(
+              itemBuilder: (BuildContext context, int index) {
+                return index >= state.listings.length + 1
+                    ? BottomLoader()
+                    : (index != 0
+                        ? ListingItem(listing: state.listings[index - 1])
+                        : _buildHeader(
+                            context: context,
+                            types: state.types,
+                            selectedType: state.selectedType.value.id,
+                          ));
+              },
+              itemCount: state.hasReachedMax
+                  ? state.listings.length
+                  : state.listings.length + 1,
+              controller: _scrollController,
             );
           default:
             return const Center(child: CircularProgressIndicator());

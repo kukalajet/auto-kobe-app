@@ -9,8 +9,8 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Image.asset(
-          'assets/bloc_logo_small.png',
+        child: Image.network(
+          'https://pbs.twimg.com/profile_images/1352001124295991298/nSMfcPd7_400x400.jpg',
           key: const Key('splash_bloc_image'),
           width: 150,
         ),

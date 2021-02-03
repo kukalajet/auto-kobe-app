@@ -13,48 +13,64 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   final AuthenticationRepository _authenticationRepository;
 
+  void nameChanged(String value) {
+    final name = Name.dirty(value);
+    emit(
+      state.copyWith(
+        name: name,
+        status: Formz.validate([
+          name,
+          state.surname,
+          state.email,
+          state.password,
+        ]),
+      ),
+    );
+  }
+
+  void surnameChanged(String value) {
+    final surname = Surname.dirty(value);
+    emit(
+      state.copyWith(
+        surname: surname,
+        status: Formz.validate([
+          state.name,
+          surname,
+          state.email,
+          state.password,
+        ]),
+      ),
+    );
+  }
+
   void emailChanged(String value) {
     final email = Email.dirty(value);
-    emit(state.copyWith(
-      email: email,
-      status: Formz.validate([
-        email,
-        state.password,
-        state.confirmedPassword,
-      ]),
-    ));
+    emit(
+      state.copyWith(
+        email: email,
+        status: Formz.validate([
+          state.name,
+          state.surname,
+          email,
+          state.password,
+        ]),
+      ),
+    );
   }
 
   void passwordChanged(String value) {
     final password = Password.dirty(value);
-    final confirmedPassword = ConfirmedPassword.dirty(
-      password: password.value,
-      value: state.confirmedPassword.value,
+    emit(
+      state.copyWith(
+        password: password,
+        status: Formz.validate([
+          state.name,
+          state.surname,
+          state.email,
+          password,
+        ]),
+      ),
     );
-    emit(state.copyWith(
-      password: password,
-      confirmedPassword: confirmedPassword,
-      status: Formz.validate([
-        state.email,
-        password,
-        state.confirmedPassword,
-      ]),
-    ));
-  }
-
-  void confirmedPasswordChanged(String value) {
-    final confirmedPassword = ConfirmedPassword.dirty(
-      password: state.password.value,
-      value: value,
-    );
-    emit(state.copyWith(
-      confirmedPassword: confirmedPassword,
-      status: Formz.validate([
-        state.email,
-        state.password,
-        confirmedPassword,
-      ]),
-    ));
   }
 
   Future<void> signUpFormSubmitted() async {
@@ -62,6 +78,8 @@ class SignUpCubit extends Cubit<SignUpState> {
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
     try {
       await _authenticationRepository.signUp(
+        firstName: state.name.value,
+        lastName: state.surname.value,
         email: state.email.value,
         password: state.password.value,
       );

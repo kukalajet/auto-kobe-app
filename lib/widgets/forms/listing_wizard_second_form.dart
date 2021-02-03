@@ -51,7 +51,7 @@ class _OriginCountryInput extends StatelessWidget {
             body: ListingCountriesList(
               onTap: (country) {
                 context
-                    .bloc<SecondFormBloc>()
+                    .read<SecondFormBloc>()
                     .add(ListingCountryChanged(country));
                 Navigator.pop(context);
               },
@@ -75,7 +75,7 @@ class _DoorTypeInput extends StatelessWidget {
           value: state.doors.value.number,
           picker: ListingDoorTypeList(
             onTap: (doors) {
-              context.bloc<SecondFormBloc>().add(ListingDoorsChanged(doors));
+              context.read<SecondFormBloc>().add(ListingDoorsChanged(doors));
               Navigator.pop(context);
             },
           ),
@@ -98,7 +98,7 @@ class _MileageInput extends StatelessWidget {
           inputType: TextInputType.number,
           suffixText: 'KM',
           onTextChanged: (String seats) => context
-              .bloc<SecondFormBloc>()
+              .read<SecondFormBloc>()
               .add(ListingMileageChanged(int.parse(seats))),
         );
       },
@@ -122,7 +122,7 @@ class _TransmissionInput extends StatelessWidget {
           picker: ListingTrasmissionsList(
             onTap: (transmission) {
               context
-                  .bloc<SecondFormBloc>()
+                  .read<SecondFormBloc>()
                   .add(ListingTransmissionChanged(transmission));
               Navigator.pop(context);
             },

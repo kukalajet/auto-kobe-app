@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_kobe/blocs/blocs.dart';
 import 'package:auto_kobe/widgets/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatelessWidget {
   static Route route() {
@@ -12,14 +13,35 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(50.0),
+        child: AppBar(
+          backgroundColor: Colors.transparent,
+          bottomOpacity: 0.0,
+          elevation: 0.0,
+          centerTitle: true,
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: BlocProvider(
-          create: (_) => LoginCubit(
-            context.repository<AuthenticationRepository>(),
-          ),
-          child: LoginForm(),
+        child: Column(
+          children: [
+            Text(
+              'Log In',
+              style: GoogleFonts.montserrat(
+                textStyle: TextStyle(
+                  color: Colors.indigo[800].withOpacity(0.9),
+                  fontSize: 48.0,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+            BlocProvider(
+              create: (_) =>
+                  LoginCubit(context.read<AuthenticationRepository>()),
+              child: LoginForm(),
+            ),
+          ],
         ),
       ),
     );

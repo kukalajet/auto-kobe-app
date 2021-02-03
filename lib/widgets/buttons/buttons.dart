@@ -1,2 +1,4 @@
-export 'search_button.dart'; // TODO: Make a generic widget out of it.
-export 'feed_type_button.dart'; // TODO: Make a generic widget out of it.
+export 'search_button.dart';
+export 'feed_type_button.dart';
+export 'button.dart';
+export 'expanded_button.dart';
