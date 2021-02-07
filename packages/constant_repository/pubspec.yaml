@@ -1,0 +1,10 @@
+name: constant_repository
+description: Dart package which manages the constants.
+version: 1.0.0
+
+environment:
+  sdk: '>=2.7.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter

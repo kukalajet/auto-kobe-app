@@ -2,6 +2,7 @@ import 'package:auto_kobe/blocs/blocs.dart';
 import 'package:auto_kobe/widgets/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:auto_kobe/widgets/widgets.dart';
 
 class SearchedListingsList extends StatefulWidget {
   @override

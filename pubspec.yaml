@@ -22,6 +22,7 @@ dependencies:
   flutter_datetime_picker: ^1.4.0
   image_picker: ^0.6.7+14
   flutter_secure_storage: ^3.3.5
+  shared_preferences: ^0.5.12+4
   cached_network_image: ^2.4.1
   carousel_slider: ^2.3.1
   flushbar: ^1.10.4
@@ -47,6 +48,8 @@ dependencies:
     path: packages/transmission_repository
   emission_repository:
     path: packages/emission_repository
+  constant_repository:
+    path: packages/constant_repository
 
 dev_dependencies:
   flutter_test:

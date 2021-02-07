@@ -1,13 +1,13 @@
+import 'package:auto_kobe/styles/styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:listing_repository/listing_repository.dart';
+import 'package:constant_repository/constant_repository.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class ListingDetail extends StatefulWidget {
-  ListingDetail(this.listing);
+  const ListingDetail(this.listing);
 
   final Listing listing;
 
@@ -32,76 +32,8 @@ class _ListingDetailState extends State<ListingDetail> {
           transitionBackgroundColor: Colors.white,
           body: Stack(
             children: <Widget>[
-              ListView(
-                reverse: false,
-                shrinkWrap: true,
-                controller: ModalScrollController.of(context),
-                physics: ClampingScrollPhysics(),
-                children: [
-                  _headerBar(),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 8.0, horizontal: 16.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(
-                                        widget.listing.model.name,
-                                        style: GoogleFonts.lato(
-                                          textStyle: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 28.0,
-                                            color: Colors.black87,
-                                          ),
-                                        ),
-                                      ),
-                                      Text(
-                                        widget.listing.brand.name,
-                                        style: GoogleFonts.lato(
-                                          textStyle: TextStyle(
-                                            color: Colors.black54,
-                                            fontSize: 22.0,
-                                            fontWeight: FontWeight.w500,
-                                            fontStyle: FontStyle.italic,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  MaterialButton(
-                                    onPressed: () => null,
-                                    color: Colors.redAccent.withOpacity(0.9),
-                                    textColor: Colors.white70,
-                                    child: Icon(Icons.favorite, size: 24),
-                                    padding: EdgeInsets.all(8.0),
-                                    shape: CircleBorder(),
-                                    minWidth: 0.0,
-                                  ),
-                                ],
-                              ),
-                              _description(),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  _infos(),
-                  SizedBox(height: 96.0),
-                ],
-              ),
-              _bottomBar(),
+              _buildContainer(),
+              _buildBottomBar(),
             ],
           ),
         ),
@@ -109,186 +41,35 @@ class _ListingDetailState extends State<ListingDetail> {
     );
   }
 
-  Widget _tile({
-    @required String field,
-    @required String value,
-    double fieldFontSize = 18.0,
-    double valueFontSize = 24.0,
-  }) {
-    double side = MediaQuery.of(context).size.width * 0.9 / 3;
-    return Container(
-      height: side * 0.75,
-      width: side,
-      child: Stack(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(left: 0.0, top: 8.0),
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: Text(
-                field,
-                overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.lato(
-                  textStyle: TextStyle(
-                    color: Colors.black54,
-                    fontSize: fieldFontSize,
-                    fontWeight: FontWeight.w300,
-                    // fontStyle: FontStyle.italic,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: Text(
-              value,
-              overflow: TextOverflow.ellipsis,
-              style: GoogleFonts.lato(
-                textStyle: TextStyle(
-                  color: Colors.black54,
-                  fontSize: valueFontSize,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-            ),
-          ),
-        ],
+  Widget _buildBackButton() {
+    return Align(
+      alignment: Alignment.topLeft,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: IconButton(
+          icon: Icon(Icons.arrow_back_ios_rounded),
+          onPressed: () => Navigator.pop(context, false),
+        ),
       ),
     );
   }
 
-  Widget _infos() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _tile(
-                field: 'YEAR',
-                value: widget.listing.registrationDate.year.toString(),
-                valueFontSize: 28.0,
-              ),
-              _tile(
-                field: 'MILEAGE',
-                value: '${widget.listing.mileage.toString()} KM',
-                valueFontSize: 20.0,
-              ),
-              _tile(
-                field: 'CONDITION',
-                value: widget.listing.condition.type.toString().split('.').last,
-                valueFontSize: 24.0,
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _tile(
-                field: 'POWER',
-                value: '${widget.listing.motorPower} kW',
-              ),
-              _tile(
-                field: 'FUEL',
-                value: widget.listing.fuelType.type.toString().split('.').last,
-              ),
-              _tile(
-                field: 'DOORS',
-                value: widget.listing.doorType.number,
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _tile(
-                field: 'EMISSION',
-                value:
-                    '${widget.listing.emission.standard} ${widget.listing.emission.tier}',
-              ),
-              _tile(
-                field: 'TRANSMISSION',
-                value:
-                    widget.listing.transmission.type.toString().split('.').last,
-                fieldFontSize: 16.0,
-                valueFontSize: 24.0,
-              ),
-              _tile(
-                field: 'CUBIC',
-                value: '${widget.listing.cubicCapacity} cc',
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _description() {
-    double width = MediaQuery.of(context).size.width;
-    return Padding(
-      padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 1.0,
-            width: width,
-            color: Colors.black12,
-          ),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 12.0, horizontal: 8.0),
-            child: Text(
-              widget.listing.description,
-              style: GoogleFonts.lato(
-                textStyle: TextStyle(
-                  fontSize: 18.0,
-                  color: Colors.black54,
-                ),
-              ),
-            ),
-          ),
-          Container(
-            height: 1.0,
-            width: width,
-            color: Colors.black12,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _headerBar() {
+  Widget _buildHeader() {
     return Stack(
       children: <Widget>[
         CarouselSlider(
-          options: CarouselOptions(
-            height: 275.0,
-            autoPlay: true,
-            autoPlayInterval: Duration(seconds: 5),
-            viewportFraction: 1,
-            onPageChanged: (index, reason) {
-              setState(() {
-                _current = index;
-              });
-            },
-          ),
           items: widget.listing.images.map((image) {
+            double width = MediaQuery.of(context).size.width;
             return Builder(
               builder: (BuildContext context) {
                 return Container(
-                  width: MediaQuery.of(context).size.width,
+                  width: width,
                   decoration: BoxDecoration(color: Colors.amber),
                   child: CachedNetworkImage(
                     imageUrl: image,
                     placeholder: (context, url) => Container(
-                      height: 175,
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ),
+                      height: 272.0,
+                      child: Center(child: CircularProgressIndicator()),
                     ),
                     fit: BoxFit.fitHeight,
                     errorWidget: (context, url, error) => Icon(Icons.error),
@@ -297,6 +78,13 @@ class _ListingDetailState extends State<ListingDetail> {
               },
             );
           }).toList(),
+          options: CarouselOptions(
+            height: 272.0,
+            autoPlay: true,
+            autoPlayInterval: Duration(seconds: 5),
+            viewportFraction: 1.0,
+            onPageChanged: (index, reason) => setState(() => _current = index),
+          ),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -305,7 +93,7 @@ class _ListingDetailState extends State<ListingDetail> {
             return Container(
               width: 8.0,
               height: 8.0,
-              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+              margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 2.0),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: _current == index
@@ -315,59 +103,185 @@ class _ListingDetailState extends State<ListingDetail> {
             );
           }).toList(),
         ),
+        _buildBackButton(),
       ],
     );
   }
 
-  Widget _bottomBar() {
+  Widget _buildHeaderTile() {
+    String model = widget.listing.model.name;
+    String brand = widget.listing.brand.name;
+
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(model, style: textTitle2Style),
+              Text(brand, style: textTitle3Style),
+            ],
+          ),
+          MaterialButton(
+            onPressed: () => null,
+            color: const Color(0xffE57373),
+            textColor: Colors.white70,
+            child: const Icon(Icons.favorite, size: 20),
+            padding: const EdgeInsets.all(8.0),
+            shape: const CircleBorder(),
+            minWidth: 0.0,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDivider({double height, double padding = 0.0}) {
+    double width = MediaQuery.of(context).size.width;
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: padding),
+      child: Container(
+        height: height,
+        width: width,
+        // color: Color(0xffEDE7F6),
+        color: ColorConstant.primaryVariant.withOpacity(0.25),
+      ),
+    );
+  }
+
+  Widget _buildDescription() {
+    String description = widget.listing.description;
+
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Text(description, style: textBodyStyle),
+    );
+  }
+
+  Widget _buildTile({String field, String value}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      child: Row(
+        children: [
+          Expanded(child: Center(child: Text(field, style: textTitle3Style))),
+          Expanded(child: Text(value, style: textTitle2Style)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInfos() {
+    return Column(
+      children: [
+        _buildTile(
+          field: 'Year',
+          value: widget.listing.registrationDate.year.toString(),
+        ),
+        _buildDivider(height: 2.0, padding: 24.0),
+        _buildTile(
+          field: 'Mileage',
+          value: '${widget.listing.mileage.toString()} KM',
+        ),
+        _buildDivider(height: 2.0, padding: 24.0),
+        _buildTile(
+          field: 'Condition',
+          value: widget.listing.condition.type.toString().split('.').last,
+        ),
+        _buildDivider(height: 2.0, padding: 24.0),
+        _buildTile(
+          field: 'Power',
+          value: '${widget.listing.motorPower} kW',
+        ),
+        _buildDivider(height: 2.0, padding: 24.0),
+        _buildTile(
+          field: 'Fuel',
+          value: widget.listing.fuelType.type.toString().split('.').last,
+        ),
+        _buildDivider(height: 2.0, padding: 24.0),
+        _buildTile(
+          field: 'Doors',
+          value: widget.listing.doorType.number,
+        ),
+        _buildDivider(height: 2.0, padding: 24.0),
+        _buildTile(
+          field: 'Emission',
+          value:
+              '${widget.listing.emission.standard} ${widget.listing.emission.tier}',
+        ),
+        _buildDivider(height: 2.0, padding: 24.0),
+        _buildTile(
+          field: 'Transmission',
+          value: widget.listing.transmission.type.toString().split('.').last,
+        ),
+        _buildDivider(height: 2.0, padding: 24.0),
+        _buildTile(
+          field: 'Cubic',
+          value: '${widget.listing.cubicCapacity} cc',
+        ),
+        SizedBox(height: 80.0),
+      ],
+    );
+  }
+
+  Widget _buildContainer() {
+    return ListView(
+      reverse: false,
+      shrinkWrap: true,
+      controller: ModalScrollController.of(context),
+      physics: ClampingScrollPhysics(),
+      children: <Widget>[
+        _buildHeader(),
+        _buildHeaderTile(),
+        _buildDivider(height: 4.0),
+        _buildDescription(),
+        _buildDivider(height: 4.0),
+        _buildInfos(),
+      ],
+    );
+  }
+
+  Widget _buildBottomBar() {
+    String price = widget.listing.price.value.toString();
+    String valute = widget.listing.price.valute.symbol;
+
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
         height: 72.0,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text(
-              '${widget.listing.price.value.toString()} ${widget.listing.price.valute.symbol}',
-              style: GoogleFonts.lato(
-                textStyle: TextStyle(
-                  color: Colors.black87,
-                  fontSize: 40.0,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-            ),
-            ButtonTheme(
-              minWidth: 175.0,
-              child: RaisedButton(
-                color: Colors.red.shade400,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0),
-                  side: BorderSide(color: Colors.red.shade500),
-                ),
-                onPressed: () => null,
-                child: Text(
-                  'CONTACT',
-                  style: GoogleFonts.lato(
-                    textStyle: TextStyle(
-                      fontSize: 18.0,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
         decoration: BoxDecoration(
           boxShadow: <BoxShadow>[
             BoxShadow(
-              color: Colors.black54,
+              color: Colors.black45,
               blurRadius: 4.0,
               offset: Offset(0.0, 0.75),
-            )
+            ),
           ],
           color: Colors.white,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text('$price $valute', style: textLargeTitleStyle),
+            ButtonTheme(
+              minWidth: 176.0,
+              height: 48.0,
+              child: RaisedButton(
+                onPressed: () => null,
+                child: Text(
+                  StringConstant.contact.toUpperCase(),
+                  style: textBodyStyleLight,
+                ),
+                color: ColorConstant.primary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24.0),
+                  side: BorderSide(color: ColorConstant.primaryVariant),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

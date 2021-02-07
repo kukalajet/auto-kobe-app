@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
@@ -46,6 +47,7 @@ class AuthenticationRepository {
     @required this.storage,
   })  : _googleSignIn = googleSignIn ?? GoogleSignIn.standard(),
         _controller = StreamController<User>() {
+    setupStorage();
     sendUser();
   }
 
@@ -65,11 +67,22 @@ class AuthenticationRepository {
   /// Storage constants
   static const String userKey = 'user';
   static const String tokenKey = 'token';
+  static const String firstRunKey = 'first_run';
 
   void sendUser() async {
+    await setupStorage();
     final user = await retrieveUser();
     if (user == null) return _controller.add(User.empty);
     _controller.add(user);
+  }
+
+  Future<void> setupStorage() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.getBool(firstRunKey) ?? true) {
+      await storage.deleteAll();
+    }
+
+    await prefs.setBool(firstRunKey, false);
   }
 
   /// Stream of [User] which will emit the current user when
@@ -183,7 +196,6 @@ class AuthenticationRepository {
       );
       final body = jsonDecode(response.body) as Map<String, dynamic>;
 
-      // final statusCode = body['statusCode'] as int;
       final statusCode = response.statusCode;
       if (statusCode != 201) throw LogInWithWrongCredentials();
 

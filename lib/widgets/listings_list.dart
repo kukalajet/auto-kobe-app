@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:listing_repository/listing_repository.dart';
 
+import 'listing_item.dart';
+
 class ListingsList extends StatefulWidget {
   @override
   _ListingsListState createState() => _ListingsListState();
