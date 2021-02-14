@@ -11,6 +11,7 @@ export 'text_picker_input_field.dart';
 export 'type_picker.dart';
 export 'text_input_field.dart';
 export 'image_picker_input.dart';
+export 'image_picker_input_field.dart';
 export 'date_picker_input_field.dart';
 export 'lists/lists.dart';
 export 'buttons/buttons.dart';

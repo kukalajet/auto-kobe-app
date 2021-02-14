@@ -56,6 +56,13 @@ final textHeadlineStyle = GoogleFonts.lato(
     fontWeight: TextConstant.fontWeight.headline,
   ),
 );
+final textHeadlineWhiteColorStyle = GoogleFonts.lato(
+  textStyle: TextStyle(
+    color: TextConstant.fontColor.headlineLight,
+    fontSize: TextConstant.fontSize.headline,
+    fontWeight: TextConstant.fontWeight.headline,
+  ),
+);
 
 final textBodyStyle = GoogleFonts.lato(
   textStyle: TextStyle(

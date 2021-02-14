@@ -1,4 +1,5 @@
 import 'package:auto_kobe/models/models.dart';
+import 'package:constant_repository/constant_repository.dart';
 import 'package:flutter/material.dart';
 
 class TypePicker extends StatefulWidget {
@@ -28,7 +29,7 @@ class _TypePickerState extends State<TypePicker> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         _TypePickerItem(
-          icon: Icon(Icons.access_alarm, size: 26),
+          icon: Icon(Icons.access_alarm, size: 30),
           tapped: indexTypeSelected == 0,
           onTypeSelected: () {
             setState(() => indexTypeSelected = 0);
@@ -36,7 +37,7 @@ class _TypePickerState extends State<TypePicker> {
           },
         ),
         _TypePickerItem(
-          icon: Icon(Icons.ac_unit, size: 26),
+          icon: Icon(Icons.ac_unit, size: 30),
           tapped: indexTypeSelected == 1,
           onTypeSelected: () {
             setState(() => indexTypeSelected = 1);
@@ -44,7 +45,7 @@ class _TypePickerState extends State<TypePicker> {
           },
         ),
         _TypePickerItem(
-          icon: Icon(Icons.ac_unit, size: 26),
+          icon: Icon(Icons.ac_unit, size: 30),
           tapped: indexTypeSelected == 2,
           onTypeSelected: () {
             setState(() => indexTypeSelected = 2);
@@ -52,7 +53,7 @@ class _TypePickerState extends State<TypePicker> {
           },
         ),
         _TypePickerItem(
-          icon: Icon(Icons.ac_unit, size: 26),
+          icon: Icon(Icons.ac_unit, size: 30),
           tapped: indexTypeSelected == 3,
           onTypeSelected: () {
             setState(() => indexTypeSelected = 3);
@@ -82,8 +83,8 @@ class _TypePickerItem extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         shape: CircleBorder(),
         primary: tapped
-            ? Colors.amber.shade200
-            : Colors.blue.shade200, // Colors.red,
+            ? ColorConstant.success.withOpacity(0.66)
+            : ColorConstant.primary, // Colors.red,
       ),
       child: Container(
         alignment: Alignment.center,

@@ -11,7 +11,8 @@ class ColorConstant {
   static const secondaryVariant = Color(0xffFF5722);
   static const background = Color(0xffFFFFFF);
   static const surface = Color(0xffFFFFFF);
-  static const error = Color(0xffB00020);
+  static const error = Color(0xffE57373);
+  static const success = Color(0xff1B5E20);
   static const onPrimary = Color(0xffFFFFFF);
   static const onSecondary = Color(0xff000000);
   static const onBackground = Color(0xff000000);

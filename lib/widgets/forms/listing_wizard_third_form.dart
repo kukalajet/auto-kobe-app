@@ -18,14 +18,16 @@ class ListingWizardThirdForm extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Padding(padding: EdgeInsets.all(8)),
+            const Padding(padding: EdgeInsets.all(8.0)),
             _CubicCapacityInput(),
-            const Padding(padding: EdgeInsets.all(8)),
+            const Padding(padding: EdgeInsets.all(8.0)),
             _FuelInput(),
-            const Padding(padding: EdgeInsets.all(8)),
+            const Padding(padding: EdgeInsets.all(8.0)),
             _EmissionInput(),
-            const Padding(padding: EdgeInsets.all(8)),
+            const Padding(padding: EdgeInsets.all(8.0)),
             _MotorPowerInput(),
+            const Padding(padding: EdgeInsets.all(8.0)),
+            _ImagesInput(),
           ],
         ),
       ),
@@ -34,6 +36,11 @@ class ListingWizardThirdForm extends StatelessWidget {
 }
 
 class _CubicCapacityInput extends StatelessWidget {
+  int _parse(String cubic) {
+    if (cubic.isEmpty) return 0;
+    return int.parse(cubic);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThirdFormBloc, ThirdFormState>(
@@ -48,7 +55,7 @@ class _CubicCapacityInput extends StatelessWidget {
           suffixText: 'CC',
           onTextChanged: (String cubicCapacity) => context
               .bloc<ThirdFormBloc>()
-              .add(ListingCubicCapacityChanged(int.parse(cubicCapacity))),
+              .add(ListingCubicCapacityChanged(_parse(cubicCapacity))),
         );
       },
     );
@@ -80,6 +87,11 @@ class _FuelInput extends StatelessWidget {
 }
 
 class _MotorPowerInput extends StatelessWidget {
+  int _parse(String power) {
+    if (power.isEmpty) return 0;
+    return int.parse(power);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThirdFormBloc, ThirdFormState>(
@@ -94,7 +106,7 @@ class _MotorPowerInput extends StatelessWidget {
           suffixText: 'kW',
           onTextChanged: (String motorPower) => context
               .bloc<ThirdFormBloc>()
-              .add(ListingMotorPowerChanged(int.parse(motorPower))),
+              .add(ListingMotorPowerChanged(_parse(motorPower))),
         );
       },
     );
@@ -121,6 +133,35 @@ class _EmissionInput extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
+        );
+      },
+    );
+  }
+}
+
+class _ImagesInput extends StatelessWidget {
+  List<String> _getImages(ThirdFormState state) =>
+      state.images != null ? state.images.value : List<String>();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ThirdFormBloc, ThirdFormState>(
+      buildWhen: (previous, current) => previous.images != current.images,
+      builder: (context, state) {
+        return ImagePickerInputField(
+          images: _getImages(state),
+          addImage: (String path) {
+            final images = _getImages(state)..add(path);
+            context
+                .read<ThirdFormBloc>()
+                .add(ListingImagesChanged(List.of(images)));
+          },
+          removeImage: (String path) {
+            final images = _getImages(state)..remove(path);
+            context
+                .read<ThirdFormBloc>()
+                .add(ListingImagesChanged(List.of(images)));
+          },
         );
       },
     );

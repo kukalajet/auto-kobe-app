@@ -11,7 +11,7 @@ class TypeInput extends StatelessWidget {
       builder: (context, state) {
         return TypePicker(
             onTypeSelected: (type) => context
-                .bloc<ListingWizardBloc>()
+                .watch()<ListingWizardBloc>()
                 .add(ListingTypeChanged(type)));
       },
     );

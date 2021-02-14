@@ -47,6 +47,7 @@ class TextFontColor {
   Color get title2 => Colors.black87;
   Color get title3 => Colors.black54;
   Color get headline => Colors.black54;
+  Color get headlineLight => Colors.white70;
   Color get body => Colors.black54;
   Color get bodyLight => Colors.white;
   Color get callout => Colors.black45;

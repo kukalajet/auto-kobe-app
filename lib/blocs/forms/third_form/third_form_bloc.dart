@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:auto_kobe/models/forms/forms.dart';
+import 'package:auto_kobe/models/forms/third_form/images_field.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
@@ -25,6 +26,8 @@ class ThirdFormBloc extends Bloc<ThirdFormEvent, ThirdFormState> {
       yield _mapMotorPowerChangedToState(event, state);
     } else if (event is ListingEmissionChanged) {
       yield _mapEmissionChangedToState(event, state);
+    } else if (event is ListingImagesChanged) {
+      yield _mapImagesChangedToState(event, state);
     }
   }
 
@@ -40,6 +43,7 @@ class ThirdFormBloc extends Bloc<ThirdFormEvent, ThirdFormState> {
         state.fuel,
         state.motorPower,
         state.emission,
+        state.images,
       ]),
     );
   }
@@ -56,6 +60,7 @@ class ThirdFormBloc extends Bloc<ThirdFormEvent, ThirdFormState> {
         fuel,
         state.motorPower,
         state.emission,
+        state.images,
       ]),
     );
   }
@@ -72,6 +77,7 @@ class ThirdFormBloc extends Bloc<ThirdFormEvent, ThirdFormState> {
         state.fuel,
         motorPower,
         state.emission,
+        state.images,
       ]),
     );
   }
@@ -88,6 +94,24 @@ class ThirdFormBloc extends Bloc<ThirdFormEvent, ThirdFormState> {
         state.fuel,
         state.motorPower,
         emission,
+        state.images,
+      ]),
+    );
+  }
+
+  ThirdFormState _mapImagesChangedToState(
+    ListingImagesChanged event,
+    ThirdFormState state,
+  ) {
+    final images = ImagesField.dirty(event.images);
+    return state.copyWith(
+      images: images,
+      status: Formz.validate([
+        state.cubicCapacity,
+        state.fuel,
+        state.motorPower,
+        state.emission,
+        images,
       ]),
     );
   }

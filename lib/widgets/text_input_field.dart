@@ -1,3 +1,4 @@
+import 'package:constant_repository/constant_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_kobe/utils/palette.dart';
 
@@ -29,13 +30,20 @@ class TextInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
     return Container(
-      height: this.height ?? 72.0,
+      height: this.height ?? 64.0,
       width: width * 0.9,
       decoration: BoxDecoration(
-        color: const Color(0xffaabbcc).withOpacity(0.1),
+        color: showOverviewHint == true
+            ? ColorConstant.success.withOpacity(0.05)
+            : ColorConstant.primary.withOpacity(0.05),
         borderRadius: BorderRadius.circular(16.0),
         border: Border.fromBorderSide(
-          BorderSide(color: const Color(0xffaabbcc), width: 4.0),
+          BorderSide(
+            width: 4.0,
+            color: showOverviewHint == true
+                ? ColorConstant.success.withOpacity(0.3)
+                : ColorConstant.primary.withOpacity(0.3),
+          ),
         ),
       ),
       child: Center(
@@ -44,25 +52,18 @@ class TextInputField extends StatelessWidget {
           child: Stack(
             children: <Widget>[
               Positioned(
-                left: width * 0.13,
+                left: 50.0,
                 child: AnimatedSwitcher(
                   duration: Duration(milliseconds: 500),
                   child: showOverviewHint
-                      ? Text(
-                          hint,
-                          style: TextStyle(color: const Color(0xffaabbcc)),
-                        )
+                      ? Text(hint, style: TextStyle(color: Colors.black45))
                       : SizedBox(),
                 ),
               ),
               TextField(
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  prefixIcon: Icon(
-                    icon,
-                    size: 28.0,
-                    color: Colors.black54,
-                  ),
+                  prefixIcon: Icon(icon, size: 28.0, color: Colors.black54),
                   suffix: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(suffixText ?? ''),

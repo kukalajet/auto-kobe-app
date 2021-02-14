@@ -86,6 +86,11 @@ class _DoorTypeInput extends StatelessWidget {
 }
 
 class _MileageInput extends StatelessWidget {
+  int _parse(String mileage) {
+    if (mileage.isEmpty) return 0;
+    return int.parse(mileage);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SecondFormBloc, SecondFormState>(
@@ -97,9 +102,9 @@ class _MileageInput extends StatelessWidget {
           showOverviewHint: state.mileage.value != 0,
           inputType: TextInputType.number,
           suffixText: 'KM',
-          onTextChanged: (String seats) => context
+          onTextChanged: (String mileage) => context
               .read<SecondFormBloc>()
-              .add(ListingMileageChanged(int.parse(seats))),
+              .add(ListingMileageChanged(_parse(mileage))),
         );
       },
     );

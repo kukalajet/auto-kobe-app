@@ -57,7 +57,8 @@ class _GoogleLoginButton extends StatelessWidget {
               Spacer()
             ],
           ),
-          onPressed: () => context.watch<LoginCubit>().logInWithGoogle(),
+          // onPressed: () => context.watch<LoginCubit>().logInWithGoogle(),
+          onPressed: () => context.read<LoginCubit>().logInWithGoogle(),
         ),
       ),
     );
@@ -93,7 +94,8 @@ class _FacebookLoginButton extends StatelessWidget {
               Spacer()
             ],
           ),
-          onPressed: () => context.watch<LoginCubit>().logInWithGoogle(),
+          // onPressed: () => context.watch<LoginCubit>().logInWithGoogle(),
+          onPressed: () => context.read<LoginCubit>().logInWithGoogle(),
         ),
       ),
     );
@@ -129,7 +131,8 @@ class _AppleLoginButton extends StatelessWidget {
               Spacer()
             ],
           ),
-          onPressed: () => context.watch<LoginCubit>().logInWithGoogle(),
+          // onPressed: () => context.watch<LoginCubit>().logInWithGoogle(),
+          onPressed: () => context.read<LoginCubit>().logInWithGoogle(),
         ),
       ),
     );

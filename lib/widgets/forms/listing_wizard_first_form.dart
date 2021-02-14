@@ -48,7 +48,7 @@ class _BrandInput extends StatelessWidget {
           expand: true,
           picker: ListingBrandsList(
             onTap: (brand) {
-              context.bloc<FirstFormBloc>().add(ListingBrandChanged(brand));
+              context.read<FirstFormBloc>().add(ListingBrandChanged(brand));
               Navigator.pop(context);
             },
           ),
@@ -108,6 +108,11 @@ class _RegistrationInput extends StatelessWidget {
 }
 
 class _PriceInput extends StatelessWidget {
+  double _parse(String mileage) {
+    if (mileage.isEmpty) return 0;
+    return double.parse(mileage);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FirstFormBloc, FirstFormState>(
@@ -118,7 +123,8 @@ class _PriceInput extends StatelessWidget {
           pickerHint: state.price.value.valute != null
               ? state.price.value.valute.name
               : 'VALUTE',
-          showOverviewHint: state.price.value.value != null,
+          showOverviewHint:
+              state.price.value.value != 0 && state.price.value.valute != null,
           picker: ListingValutesList(
             onTap: (valute) {
               context.bloc<FirstFormBloc>().add(ListingValuteChanged(valute));
@@ -129,7 +135,7 @@ class _PriceInput extends StatelessWidget {
           inputType: TextInputType.number,
           onTextChanged: (String price) => context
               .bloc<FirstFormBloc>()
-              .add(ListingPriceChanged(double.parse(price))),
+              .add(ListingPriceChanged(_parse(price))),
         );
       },
     );

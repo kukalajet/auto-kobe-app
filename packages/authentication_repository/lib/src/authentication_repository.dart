@@ -208,7 +208,10 @@ class AuthenticationRepository {
       // TODO: Reconsider moving the following logic out of here.
       final user = await getSelf();
       _controller.add(user);
-    } on Exception {
+      // } on Exception {
+      //   throw LogInWithEmailAndPasswordFailure();
+      // }
+    } catch (error) {
       throw LogInWithEmailAndPasswordFailure();
     }
   }

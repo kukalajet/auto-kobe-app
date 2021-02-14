@@ -7,6 +7,8 @@ class ThirdFormState extends Equatable {
     this.fuel = const FuelField.pure(),
     this.motorPower = const MotorPowerField.pure(),
     this.emission = const EmissionField.pure(),
+    // this.images = const ImagesField.pure(),
+    this.images,
   });
 
   final FormzStatus status;
@@ -14,6 +16,7 @@ class ThirdFormState extends Equatable {
   final FuelField fuel;
   final MotorPowerField motorPower;
   final EmissionField emission;
+  final ImagesField images;
 
   ThirdFormState copyWith({
     FormzStatus status,
@@ -21,6 +24,7 @@ class ThirdFormState extends Equatable {
     FuelField fuel,
     MotorPowerField motorPower,
     EmissionField emission,
+    ImagesField images,
   }) {
     return ThirdFormState(
       status: status ?? this.status,
@@ -28,11 +32,19 @@ class ThirdFormState extends Equatable {
       fuel: fuel ?? this.fuel,
       motorPower: motorPower ?? this.motorPower,
       emission: emission ?? this.emission,
+      images: images ?? this.images,
     );
   }
 
   bool get valid => status == FormzStatus.valid;
 
   @override
-  List<Object> get props => [status, cubicCapacity, fuel, motorPower, emission];
+  List<Object> get props => [
+        status,
+        cubicCapacity,
+        fuel,
+        motorPower,
+        emission,
+        images,
+      ];
 }

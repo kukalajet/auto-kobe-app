@@ -1,4 +1,6 @@
+import 'package:auto_kobe/styles/text/text_style.dart';
 import 'package:auto_kobe/utils/palette.dart';
+import 'package:constant_repository/constant_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_kobe/blocs/blocs.dart';
@@ -12,6 +14,30 @@ import 'package:country_repository/country_repository.dart';
 import 'package:condition_repository/condition_repository.dart';
 
 class ListingCreationScreen extends StatelessWidget {
+  Widget _buildCreationButton(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+      child: ButtonTheme(
+        minWidth: width,
+        height: 56.0,
+        child: RaisedButton(
+          onPressed: () => {},
+          child: Text(
+            "CREATE",
+            style: textBodyStyleLight,
+          ),
+          color: ColorConstant.primaryVariant,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(28.0),
+            side: BorderSide(color: ColorConstant.primaryVariant),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -96,11 +122,11 @@ class ListingCreationScreen extends StatelessWidget {
                     ),
                     AnimatedSwitcher(
                       duration: Duration(milliseconds: 500),
-                      child: state.secondForm.valid
-                          ? ImagePickerInput()
+                      child: state.thirdForm.valid
+                          ? _buildCreationButton(context)
                           : SizedBox(),
                     ),
-                    SizedBox(height: 16.0),
+                    SizedBox(height: 32.0),
                   ],
                 ),
               );

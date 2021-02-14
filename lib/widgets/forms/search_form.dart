@@ -234,7 +234,8 @@ class _PriceInput extends StatelessWidget {
     return BlocBuilder<SearchBloc, SearchState>(
       buildWhen: (previous, current) => previous.price != current.price,
       builder: (context, state) {
-        final state = context.watch<SearchBloc>().state;
+        // final state = context.watch<SearchBloc>().state;
+        final state = context.read<SearchBloc>().state;
         if (state.price.value.isEmpty) {
           Price lowerLimit = Price(value: 0.0, valute: Valute.euro());
           Price upperLimit =

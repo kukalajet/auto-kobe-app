@@ -42,3 +42,12 @@ class ListingEmissionChanged extends ThirdFormEvent {
   @override
   List<Object> get props => [emission];
 }
+
+class ListingImagesChanged extends ThirdFormEvent {
+  const ListingImagesChanged(this.images);
+
+  final List<String> images;
+
+  @override
+  List<Object> get props => [images];
+}
