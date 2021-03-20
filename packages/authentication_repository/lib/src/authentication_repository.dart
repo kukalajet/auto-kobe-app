@@ -57,7 +57,8 @@ class AuthenticationRepository {
   final FlutterSecureStorage storage;
 
   /// Authentication service's constants
-  static const String baseUrl = 'https://auto24.herokuapp.com/';
+  // static const String baseUrl = 'https://auto24.herokuapp.com/';
+  static const String baseUrl = 'http://192.168.1.12:3000/';
   static const String authUrl = '${baseUrl}auth/';
   static const String usersUrl = '${baseUrl}users/';
   static const String signinEndpoint = 'signin';
@@ -126,6 +127,8 @@ class AuthenticationRepository {
       if (statusCode != 201) throw SignUpWithWrongCredentials();
 
       await logInWithEmailAndPassword(email: email, password: password);
+    } catch (e) {
+      print(e);
     } on Exception {
       throw SignUpFailure();
     }

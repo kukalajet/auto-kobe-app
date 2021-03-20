@@ -1,8 +1,9 @@
 import 'package:auto_kobe/widgets/widgets.dart';
+import 'package:constant_repository/constant_repository.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_kobe/blocs/blocs.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:formz/formz.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,16 +15,37 @@ class LoginForm extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const SizedBox(height: 16.0),
-          _GoogleLoginButton(),
-          _FacebookLoginButton(),
-          _AppleLoginButton(),
           const SizedBox(height: 24.0),
           _EmailInput(),
           _PasswordInput(),
+          const SizedBox(height: 8.0),
           _LoginButton(),
+          const SizedBox(height: 8.0),
+          _SocialButtons(),
         ],
       ),
+    );
+  }
+}
+
+class _SocialButtons extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16.0),
+          child: AppDivider(height: 1.0, padding: 32.0),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _GoogleLoginButton(),
+            _FacebookLoginButton(),
+            _AppleLoginButton(),
+          ],
+        ),
+      ],
     );
   }
 }
@@ -32,34 +54,10 @@ class _GoogleLoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
-      child: Container(
-        width: double.infinity,
-        height: 52.0,
-        child: RaisedButton(
-          color: Colors.red.withOpacity(0.75),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.0),
-            side: BorderSide(color: Colors.red),
-          ),
-          child: Row(
-            children: [
-              Icon(FontAwesomeIcons.google, color: Colors.white),
-              Spacer(),
-              Text(
-                'SIGN IN WITH GOOGLE',
-                style: GoogleFonts.lato(
-                  color: Colors.white,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              Spacer()
-            ],
-          ),
-          // onPressed: () => context.watch<LoginCubit>().logInWithGoogle(),
-          onPressed: () => context.read<LoginCubit>().logInWithGoogle(),
-        ),
+      padding: EdgeInsets.all(4.0),
+      child: SocialButton(
+        social: Social.Google,
+        onPressed: () => context.read<LoginCubit>().logInWithGoogle(),
       ),
     );
   }
@@ -69,34 +67,10 @@ class _FacebookLoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
-      child: Container(
-        width: double.infinity,
-        height: 52.0,
-        child: RaisedButton(
-          color: Colors.blue.withOpacity(0.75),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.0),
-            side: BorderSide(color: Colors.blue),
-          ),
-          child: Row(
-            children: [
-              Icon(FontAwesomeIcons.facebookF, color: Colors.white),
-              Spacer(),
-              Text(
-                'SIGN IN WITH FACEBOOK',
-                style: GoogleFonts.lato(
-                  color: Colors.white,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              Spacer()
-            ],
-          ),
-          // onPressed: () => context.watch<LoginCubit>().logInWithGoogle(),
-          onPressed: () => context.read<LoginCubit>().logInWithGoogle(),
-        ),
+      padding: EdgeInsets.all(4.0),
+      child: SocialButton(
+        social: Social.Facebook,
+        onPressed: () => context.read<LoginCubit>().logInWithGoogle(),
       ),
     );
   }
@@ -106,34 +80,10 @@ class _AppleLoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
-      child: Container(
-        width: double.infinity,
-        height: 52.0,
-        child: RaisedButton(
-          color: Colors.black.withOpacity(0.65),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.0),
-            side: BorderSide(color: Colors.black12),
-          ),
-          child: Row(
-            children: [
-              Icon(FontAwesomeIcons.apple, color: Colors.white),
-              Spacer(),
-              Text(
-                'SIGN IN WITH APPLE',
-                style: GoogleFonts.lato(
-                  color: Colors.white,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              Spacer()
-            ],
-          ),
-          // onPressed: () => context.watch<LoginCubit>().logInWithGoogle(),
-          onPressed: () => context.read<LoginCubit>().logInWithGoogle(),
-        ),
+      padding: EdgeInsets.all(4.0),
+      child: SocialButton(
+        social: Social.Apple,
+        onPressed: () => context.read<LoginCubit>().logInWithGoogle(),
       ),
     );
   }
@@ -190,36 +140,47 @@ class _LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginCubit, LoginState>(
-        buildWhen: (previous, current) => previous.status != current.status,
-        builder: (context, state) {
-          return state.status.isSubmissionInProgress
-              ? const CircularProgressIndicator()
-              : Padding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
-                  child: Container(
-                    width: double.infinity,
-                    height: 52.0,
-                    child: RaisedButton(
-                      color: Colors.blueGrey.withOpacity(0.7),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(26.0),
-                      ),
-                      child: Text(
-                        'SIGN IN WITH EMAIL',
-                        style: GoogleFonts.lato(
-                          color: Colors.white,
-                          fontSize: 22.0,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      onPressed: state.status.isValidated
-                          ? () =>
-                              context.read<LoginCubit>().logInWithCredentials()
-                          : null,
+      buildWhen: (previous, current) => previous.status != current.status,
+      builder: (context, state) {
+        if (state.status.isSubmissionFailure) {
+          Flushbar(
+            flushbarStyle: FlushbarStyle.GROUNDED,
+            flushbarPosition: FlushbarPosition.TOP,
+            title: "Regjistrohu ose logohu",
+            message:
+                "Për të aksesuar produktet ne aplikacion, duhet të logoheni",
+            duration: Duration(seconds: 3),
+          )..show(context);
+        }
+
+        return state.status.isSubmissionInProgress
+            ? const CircularProgressIndicator()
+            : Padding(
+                padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
+                child: Container(
+                  width: double.infinity,
+                  height: 52.0,
+                  child: RaisedButton(
+                    color: ColorConstant.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(26.0),
                     ),
+                    child: Text(
+                      'SIGN IN WITH EMAIL',
+                      style: GoogleFonts.lato(
+                        color: Colors.white,
+                        fontSize: 22.0,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    onPressed: state.status.isValidated
+                        ? () =>
+                            context.read<LoginCubit>().logInWithCredentials()
+                        : null,
                   ),
-                );
-        });
+                ),
+              );
+      },
+    );
   }
 }

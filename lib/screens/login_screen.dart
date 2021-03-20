@@ -13,6 +13,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(50.0),
         child: AppBar(
@@ -23,25 +24,28 @@ class LoginPage extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Text(
-              'Log In',
-              style: GoogleFonts.montserrat(
-                textStyle: TextStyle(
-                  color: Colors.indigo[800].withOpacity(0.9),
-                  fontSize: 48.0,
-                  fontWeight: FontWeight.w700,
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: SingleChildScrollView(
+          physics: ClampingScrollPhysics(),
+          child: Column(
+            children: [
+              Text(
+                'Log In',
+                style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                    color: Colors.indigo[800].withOpacity(0.9),
+                    fontSize: 48.0,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
-            ),
-            BlocProvider(
-              create: (_) =>
-                  LoginCubit(context.read<AuthenticationRepository>()),
-              child: LoginForm(),
-            ),
-          ],
+              BlocProvider(
+                create: (_) =>
+                    LoginCubit(context.read<AuthenticationRepository>()),
+                child: LoginForm(),
+              ),
+            ],
+          ),
         ),
       ),
     );

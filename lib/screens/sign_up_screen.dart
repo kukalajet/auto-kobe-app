@@ -25,26 +25,29 @@ class SignUpScreen extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Text(
-              'Register',
-              style: GoogleFonts.montserrat(
-                textStyle: TextStyle(
-                  color: Colors.indigo[800].withOpacity(0.9),
-                  fontSize: 48.0,
-                  fontWeight: FontWeight.w700,
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: SingleChildScrollView(
+          physics: ClampingScrollPhysics(),
+          child: Column(
+            children: [
+              Text(
+                'Register',
+                style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                    color: Colors.indigo[800].withOpacity(0.9),
+                    fontSize: 48.0,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
-            ),
-            BlocProvider<SignUpCubit>(
-              create: (_) => SignUpCubit(
-                context.read<AuthenticationRepository>(),
+              BlocProvider<SignUpCubit>(
+                create: (_) => SignUpCubit(
+                  context.read<AuthenticationRepository>(),
+                ),
+                child: SignUpForm(),
               ),
-              child: SignUpForm(),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
